@@ -1,0 +1,1 @@
+export const selectAddNewParam = (state) => state.main.isAddNewParam;

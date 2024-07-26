@@ -1,0 +1,22 @@
+.container {
+  height: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.topBtn {
+  width: 100%;
+  margin-top: 51px;
+}
+
+.btn {
+  width: 100%;
+}
+
+.picker {
+  width: 100%;
+}

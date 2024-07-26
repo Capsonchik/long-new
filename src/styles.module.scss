@@ -1,0 +1,58 @@
+.container {
+  max-width: 1280px;
+  outline: 1px solid gray;
+  margin: 0 auto;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.header {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.topBlocks {
+  display: flex;
+  justify-content: space-between;
+}
+
+.block1 {
+  outline: 1px solid gray;
+  height: 450px;
+  width: 33%;
+}
+
+.block2 {
+  outline: 1px solid gray;
+  height: 450px;
+  width: 33%;
+}
+
+.block2Content {
+  
+}
+
+.block3 {
+  padding: 20px;
+  outline: 1px solid gray;
+  height: 600px;
+  width: 33%;
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.blockPicker {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.block3Left {
+  width: 49%;
+}
+
+.block3Right {
+  width: 49%;
+}
