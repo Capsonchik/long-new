@@ -4,7 +4,8 @@ const initialState = {
   isAddNewParam: false,
   longitude: true,
   socio: true,
-  culture: true
+  culture: true,
+  currentGraph: 'bar'
 }
 
 export const counterSlice = createSlice({
@@ -23,6 +24,9 @@ export const counterSlice = createSlice({
     setCulture: (state, action) => {
       state.culture = action.payload
     },
+    setCurrentGraph: (state, action) => {
+      state.currentGraph = action.payload
+    },
   },
 })
 
@@ -31,7 +35,8 @@ export const {
   addNewParamOption,
   setCulture,
   setLong,
-  setSocio
+  setSocio,
+  setCurrentGraph
 } = counterSlice.actions
 
 export default counterSlice.reducer
