@@ -4,6 +4,7 @@ import './index.css'
 import {Provider} from "react-redux";
 import {store} from "./store/store.js";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import DataPage from "./pages/dataPage/DataPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -12,7 +13,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/data",
-    element: <span>data</span>,
+    element: <DataPage/>,
   },
 ]);
 

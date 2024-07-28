@@ -10,6 +10,7 @@ import {useSelector} from "react-redux";
 import {selectAddNewParam} from "./store/mainSelectors.js";
 import {SecondParamBlock} from "./components/secondParamBlock/SecondParamBlock.jsx";
 import {ExternalFactors} from "./components/externalFactors/ExternalFactors.jsx";
+import {Header} from "./components/header/Header.jsx";
 
 export const  App = () => {
   const isAddNewParam = useSelector(selectAddNewParam);
@@ -25,7 +26,7 @@ export const  App = () => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.header}>ЛОНГИТЮДНАЯ СИСТЕМА РОМИР</h1>
+      <Header/>
       <div className={styles.topBlocks}>
 
         <div className={styles.concatBlocks}>
