@@ -49,9 +49,21 @@
   height: 600px;
   width: 33%;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
 }
 
+.block3Filters {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 20px;
+}
+
+.btn {
+  width: 200px;
+  height: 70px;
+}
 
 .blockPicker {
   width: 100%;

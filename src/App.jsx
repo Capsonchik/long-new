@@ -2,17 +2,16 @@ import './App.css'
 import 'rsuite/dist/rsuite.min.css';
 import styles from './styles.module.scss';
 import {PieChart} from "./components/pieChart/PieChart.jsx";
-import {CheckPicker} from "rsuite";
+import {Button, CheckPicker} from "rsuite";
 import {FirstParamBlock} from "./components/firstParamBlock/FirstParamBlock.jsx";
 import {Period} from "./components/block3/period/Period.jsx";
 import {Space} from "./components/block3/space/Space.jsx";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {selectAddNewParam} from "./store/mainSelectors.js";
 import {SecondParamBlock} from "./components/secondParamBlock/SecondParamBlock.jsx";
 import {ExternalFactors} from "./components/externalFactors/ExternalFactors.jsx";
 
 function App() {
-  const dispatch = useDispatch();
   const isAddNewParam = useSelector(selectAddNewParam);
 
   const data = [
@@ -56,11 +55,17 @@ function App() {
 
         </div>
         <div className={styles.block3}>
-          <div className={styles.block3Left}>
-            <Period/>
+          <div className={styles.block3Filters}>
+            <div className={styles.block3Left}>
+              <Period/>
+            </div>
+            <div className={styles.block3Right}>
+              <Space/>
+            </div>
           </div>
-          <div className={styles.block3Right}>
-            <Space/>
+          <div className={styles.block3Filters}>
+            <Button className={styles.btn}>График</Button>
+            <Button className={styles.btn}>Exel таблица</Button>
           </div>
         </div>
       </div>
