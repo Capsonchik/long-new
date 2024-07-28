@@ -5,6 +5,7 @@ import { FaChartLine } from "react-icons/fa";
 import { FaChartBar } from "react-icons/fa";
 import {useDispatch} from "react-redux";
 import {setCurrentGraph} from "../../store/mainSlice.js";
+import {BarChart} from "../../components/charts/barChart.jsx";
 
 export const DataPage = () => {
   const dispatch = useDispatch()
@@ -23,7 +24,7 @@ export const DataPage = () => {
       <div className={styles.params}>
         <div className={styles.paramsBlock}>
           <span className={styles.paramsBlockTitle}>Настройка параметров</span>
-          <SelectPicker data={data}/>
+          <SelectPicker data={data} placeholder={'Параметр 1'}/>
           <span className={styles.paramsBlockGraph}>График для вывода</span>
           <div className={styles.btnsGroop}>
             <Button onClick={() => dispatch(setCurrentGraph('line'))} className={styles.btn}>
@@ -32,11 +33,21 @@ export const DataPage = () => {
             <Button nClick={() => dispatch(setCurrentGraph('bar'))} className={styles.btn}>
               <FaChartBar style={{fontSize: 40, cursor: 'pointer'}}/>
             </Button>
-
           </div>
         </div>
         <div className={styles.graphBlock}>
-          test
+          <div>
+            <BarChart/>
+          </div>
+          <div>
+            <BarChart/>
+          </div>
+          <div>
+            <BarChart/>
+          </div>
+          <div>
+            <BarChart/>
+          </div>
         </div>
       </div>
     </div>
