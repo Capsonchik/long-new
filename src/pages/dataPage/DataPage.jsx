@@ -6,11 +6,13 @@ import { FaChartBar } from "react-icons/fa";
 import {useDispatch, useSelector} from "react-redux";
 import {setCurrentGraph} from "../../store/mainSlice.js";
 import {BarChart} from "../../components/charts/barChart.jsx";
-import {selectSecondParam} from "../../store/mainSelectors.js";
+import {selectCurrentGraph, selectSecondParam} from "../../store/mainSelectors.js";
+import {LineChart} from "../../components/charts/lineChart.jsx";
 
 export const DataPage = () => {
   const dispatch = useDispatch();
   const secondParam = useSelector(selectSecondParam);
+  const currentGraph = useSelector(selectCurrentGraph);
 
   const data = [
     'Eugenia',
@@ -36,25 +38,25 @@ export const DataPage = () => {
           <span className={styles.paramsBlockGraph}>График для вывода</span>
           <div className={styles.btnsGroop}>
             <Button onClick={() => dispatch(setCurrentGraph('line'))} className={styles.btn}>
-              <FaChartLine  style={{fontSize: 40, cursor: 'pointer'}}/>
+              <FaChartLine style={{fontSize: 40, cursor: 'pointer'}}/>
             </Button>
-            <Button nClick={() => dispatch(setCurrentGraph('bar'))} className={styles.btn}>
+            <Button onClick={() => dispatch(setCurrentGraph('bar'))} className={styles.btn}>
               <FaChartBar style={{fontSize: 40, cursor: 'pointer'}}/>
             </Button>
           </div>
         </div>
         <div className={styles.graphBlock}>
           <div>
-            <BarChart/>
+            {currentGraph === 'bar' ? <BarChart/> : <LineChart/>}
           </div>
           <div>
-            <BarChart/>
+            {currentGraph === 'bar' ? <BarChart/> : <LineChart/>}
           </div>
           <div>
-            <BarChart/>
+            {currentGraph === 'bar' ? <BarChart/> : <LineChart/>}
           </div>
           <div>
-            <BarChart/>
+            {currentGraph === 'bar' ? <BarChart/> : <LineChart/>}
           </div>
         </div>
       </div>
