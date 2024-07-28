@@ -11,7 +11,7 @@ import {selectAddNewParam} from "./store/mainSelectors.js";
 import {SecondParamBlock} from "./components/secondParamBlock/SecondParamBlock.jsx";
 import {ExternalFactors} from "./components/externalFactors/ExternalFactors.jsx";
 
-function App() {
+export const  App = () => {
   const isAddNewParam = useSelector(selectAddNewParam);
 
   const data = [
@@ -64,8 +64,8 @@ function App() {
             </div>
           </div>
           <div className={styles.block3Filters}>
-            <Button className={styles.btn}>График</Button>
-            <Button className={styles.btn}>Exel таблица</Button>
+            <Button disabled color={'orange'} appearance={'primary'} className={styles.btn}>График</Button>
+            <Button disabled color={'orange'} appearance={'primary'} className={styles.btn}>Exel таблица</Button>
           </div>
         </div>
       </div>
@@ -73,4 +73,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

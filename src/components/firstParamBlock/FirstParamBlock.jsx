@@ -36,14 +36,15 @@ export const FirstParamBlock = () => {
 
   return (
     <div className={styles.container}>
-      <Button onClick={handleSetNewParam} className={styles.btn}>
+      <Button color={'orange'} appearance={"primary"} onClick={handleSetNewParam} className={styles.btn}>
         {!isAddNewParam ? 'Открыть дополнительный параметр' : 'Скрыть параметр'}
       </Button>
-      <Button onClick={handleSetLongitude} className={styles.btn}>Лонгитюдные данные</Button>
-      <Button onClick={handleSetSocio} className={styles.btn}>Социальная</Button>
-      <Button onClick={handleSetCulture} className={styles.btn}>Культура и досуг</Button>
+      <Button color={'orange'} appearance={"primary"}  onClick={handleSetLongitude} className={styles.btn}>Лонгитюдные данные</Button>
+      <Button color={'orange'} appearance={"primary"}  onClick={handleSetSocio} className={styles.btn}>Социальная</Button>
+      <Button color={'orange'} appearance={"primary"}  onClick={handleSetCulture} className={styles.btn}>Культура и досуг</Button>
       <SelectPicker className={styles.picker} data={data} placeholder={'Параметр'}/>
-      <Button className={styles.btn}>Готово</Button>
+      <Button color={'orange'} appearance={"primary"}
+              className={styles.btn}>Готово</Button>
     </div>
   );
 };
