@@ -1,58 +1,118 @@
 import styles from './styles.module.scss'
 import {Button, SelectPicker} from "rsuite";
 import {useDispatch, useSelector} from "react-redux";
-import {addNewParamOption, setCulture, setLong, setSocio} from "../../store/mainSlice.js";
-import {BLOCK_1_PARAMS} from "../../mocks/paramsMock.js";
+import {addNewParamOption, setLong} from "../../store/mainSlice.js";
 import {selectAddNewParam} from "../../store/mainSelectors.js";
-import {useState} from "react";
-import bigData from '../../mocks/full_level_new2607.json';
-import {setFirstParamCategory, setFirstParamCategoryData} from "../../store/firstParamsSlice/firstParam.slice.js";
-import {selectFirstParamCategoryData} from "../../store/firstParamsSlice/firstParam.selectors.js";
+import {
+  setFirstBlockParamBlockId,
+  setFirstBlockParamCategoryId,
+  setForthBlockParamBlockCategoryId,
+  setForthBlockParamBlockId,
+  setSecondBlockParamBlockCategoryId,
+  setSecondBlockParamBlockId,
+  setThirdBlockParamBlockCategoryId,
+  setThirdBlockParamBlockId,
+} from "../../store/firstParamsSlice/firstParam.slice.js";
+import {
+  selectFifthParam,
+  selectFirstParam,
+  selectForthParam,
+  selectSecondParam,
+  selectThirdBlock
+} from "../../store/firstParamsSlice/firstParam.selectors.js";
+import {
+  fetchGetFifthParams,
+  fetchGetForthParams,
+  fetchGetSecondParams,
+  fetchGetThirdParams
+} from "../../store/firstParamsSlice/firstParam.actions.js";
 
 
 export const FirstParamBlock = () => {
   const dispatch = useDispatch();
-  const data = BLOCK_1_PARAMS.map(item => ({label: item, value: item}));
-  const isAddNewParam = useSelector(selectAddNewParam);
-  const paramsData = useSelector(selectFirstParamCategoryData);
-  const [current, setCurrent] = useState('')
+  const firstParam = useSelector(selectFirstParam);
+  const secondParam = useSelector(selectSecondParam);
+  const thirdParam = useSelector(selectThirdBlock);
+  const forthParam = useSelector(selectForthParam);
+  const fifthParam = useSelector(selectFifthParam);
 
-  const firstParamCategory = bigData.map((item) => ({label: item.title, value: item.title}));
-  const firstParamCategoryData = paramsData && paramsData.map((item) => ({label: item.name, value: item.name}));
+  const firstParamData = firstParam && firstParam.map(item => ({
+    label: item.category_name,
+    value: {id: item.category_id, name: item.category_name, slave: item.slave_block_name},
+  }));
+
+  const secondParamData = secondParam && secondParam.map(item => ({
+    label: item.category_name,
+    value: {id: item.category_id, name: item.category_name, slave: item.slave_block_name},
+  }))
+
+  const thirdParamData = thirdParam && thirdParam.map(item => ({
+    label: item.category_name,
+    value: {id: item.category_id, name: item.category_name, slave: item.slave_block_name},
+  }))
+
+  const forthParamData = forthParam && forthParam.map(item => ({
+    label: item.category_name,
+    value: {id: item.category_id, name: item.category_name, slave: item.slave_block_name},
+  }))
+
+  const fifthParamData = fifthParam && fifthParam.map(item => ({
+    label: item.category_name,
+    value: {id: item.category_id, name: item.category_name, slave: item.slave_block_name},
+  }))
+
+  const isAddNewParam = useSelector(selectAddNewParam);
+
 
   const handleSetNewParam = () => {
     dispatch(addNewParamOption(!isAddNewParam))
   }
 
-  const filterCurrentCategory = (value) => {
-    bigData.map((item) => {
-      if (item.title === value) {
-        dispatch(setFirstParamCategoryData(item.categories));
-        return item.categories;
-      }
-    })
+
+  const handleSegmentSave = (value) => {
+    dispatch(setFirstBlockParamBlockId(value.slave))
+    dispatch(setFirstBlockParamCategoryId(value.id))
+    dispatch(fetchGetSecondParams({block_id: value.id, category_id: value.slave}))
   }
 
   const handleCategorySave = (value) => {
-    dispatch(setFirstParamCategory(value))
-    filterCurrentCategory(value)
+    dispatch(setSecondBlockParamBlockId(value.slave))
+    dispatch(setSecondBlockParamBlockCategoryId(value.id))
+    dispatch(fetchGetThirdParams({block_id: value.id, category_id: value.slave}))
   }
 
-  const handleSetValue = () => {
-    if (current === 'long') {
-      dispatch(setLong(false))
-      dispatch(setSocio(true))
-      dispatch(setCulture(true))
-    } else if (current === 'socio') {
-      dispatch(setLong(true))
-      dispatch(setSocio(false))
-      dispatch(setCulture(true))
-    } else if (current === 'culture') {
-      dispatch(setLong(true))
-      dispatch(setSocio(true))
-      dispatch(setCulture(false))
-    }
+  const handleBlock3Save = (value) => {
+    dispatch(setThirdBlockParamBlockId(value.slave))
+    dispatch(setThirdBlockParamBlockCategoryId(value.id))
+    dispatch(fetchGetForthParams({block_id: value.id, category_id: value.slave}))
   }
+
+  const handleBlock4Save = (value) => {
+    dispatch(setForthBlockParamBlockId(value.slave))
+    dispatch(setForthBlockParamBlockCategoryId(value.id))
+    dispatch(fetchGetFifthParams({block_id: value.id, category_id: value.slave}))
+  }
+
+  const handleBlock5Save = () => {
+    dispatch(setLong(false))
+  }
+
+
+  // const handleSetValue = () => {
+  //   if (current === 'long') {
+  //     dispatch(setLong(false))
+  //     dispatch(setSocio(true))
+  //     dispatch(setCulture(true))
+  //   } else if (current === 'socio') {
+  //     dispatch(setLong(true))
+  //     dispatch(setSocio(false))
+  //     dispatch(setCulture(true))
+  //   } else if (current === 'culture') {
+  //     dispatch(setLong(true))
+  //     dispatch(setSocio(true))
+  //     dispatch(setCulture(false))
+  //   }
+  // }
 
   return (
     <div className={styles.container}>
@@ -62,31 +122,34 @@ export const FirstParamBlock = () => {
       </Button>
       <SelectPicker
         className={styles.picker}
-        data={firstParamCategory}
+        data={firstParamData}
+        placeholder={'Сегмент'}
+        onChange={handleSegmentSave}
+      />
+      <SelectPicker
+        className={styles.picker}
+        data={secondParamData}
         placeholder={'Категория'}
         onChange={handleCategorySave}
       />
       <SelectPicker
         className={styles.picker}
-        data={firstParamCategoryData}
-        placeholder={'Категория'}
-        onChange={handleCategorySave}
+        data={thirdParamData}
+        placeholder={'Подкатегория'}
+        onChange={handleBlock3Save}
       />
-      {/*<Button color={'orange'} appearance={"primary"} onClick={() => setCurrent('long')} className={styles.btn}>Лонгитюдные*/}
-      {/*  данные</Button>*/}
-      {/*<Button color={'orange'} appearance={"primary"} onClick={() => setCurrent('socio')}*/}
-      {/*        className={styles.btn}>Социальная</Button>*/}
-      <Button color={'orange'} appearance={"primary"} onClick={() => setCurrent('culture')} className={styles.btn}>Культура
-        и досуг</Button>
-      <SelectPicker className={styles.picker} data={data} placeholder={'Параметр'}/>
-      <Button
-        onClick={handleSetValue}
-        color={'orange'}
-        appearance={"primary"}
-        className={styles.btn}
-      >
-        Готово
-      </Button>
+      <SelectPicker
+        className={styles.picker}
+        data={forthParamData}
+        placeholder={'Группа параметров'}
+        onChange={handleBlock4Save}
+      />
+      <SelectPicker
+        className={styles.picker}
+        data={fifthParamData}
+        placeholder={'Параметр'}
+        onChange={handleBlock5Save}
+      />
     </div>
   );
 };

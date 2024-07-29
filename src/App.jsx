@@ -6,16 +6,21 @@ import {Button, CheckPicker} from "rsuite";
 import {FirstParamBlock} from "./components/firstParamBlock/FirstParamBlock.jsx";
 import {Period} from "./components/block3/period/Period.jsx";
 import {Space} from "./components/block3/space/Space.jsx";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {selectAddNewParam} from "./store/mainSelectors.js";
 import {SecondParamBlock} from "./components/secondParamBlock/SecondParamBlock.jsx";
 import {ExternalFactors} from "./components/externalFactors/ExternalFactors.jsx";
 import {Header} from "./components/header/Header.jsx";
-import bigData from './mocks/full_level_new2607.json'
+import {useEffect} from "react";
+import {fetchGetFirstParams} from "./store/firstParamsSlice/firstParam.actions.js";
 
 export const App = () => {
   const isAddNewParam = useSelector(selectAddNewParam);
-  console.log(bigData)
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchGetFirstParams())
+  }, [dispatch]);
 
   const data = [
     'Eugenia',
