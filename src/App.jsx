@@ -11,9 +11,11 @@ import {selectAddNewParam} from "./store/mainSelectors.js";
 import {SecondParamBlock} from "./components/secondParamBlock/SecondParamBlock.jsx";
 import {ExternalFactors} from "./components/externalFactors/ExternalFactors.jsx";
 import {Header} from "./components/header/Header.jsx";
+import bigData from './mocks/full_level_new2607.json'
 
-export const  App = () => {
+export const App = () => {
   const isAddNewParam = useSelector(selectAddNewParam);
+  console.log(bigData)
 
   const data = [
     'Eugenia',
