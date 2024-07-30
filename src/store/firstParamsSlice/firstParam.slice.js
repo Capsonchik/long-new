@@ -1,5 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {
+  fetchGetAnswers,
   fetchGetFifthParams,
   fetchGetFirstParams,
   fetchGetForthParams,
@@ -24,6 +25,8 @@ const initialState = {
   fifthBlock: [],
   fifthBlockParamBlockId: '',
   fifthBlockParamBlockCategoryId: null,
+  answers: [],
+  dataLoader: false
 }
 
 export const firstParamsSlice = createSlice({
@@ -56,6 +59,12 @@ export const firstParamsSlice = createSlice({
     },
     setForthBlockParamBlockCategoryId: (state, action) => {
       state.forthBlockParamBlockCategoryId = action.payload
+    },
+    setFifthBlockParamBlockId: (state, action) => {
+      state.fifthBlockParamBlockId = action.payload
+    },
+    setFifthBlockParamBlockCategoryId: (state, action) => {
+      state.fifthBlockParamBlockCategoryId = action.payload
     }
   },
   extraReducers: builder => {
@@ -75,6 +84,13 @@ export const firstParamsSlice = createSlice({
       .addCase(fetchGetFifthParams.fulfilled, (state, action) => {
         state.fifthBlock = action.payload
       })
+      .addCase(fetchGetAnswers.fulfilled, (state, action) => {
+        state.answers = action.payload
+        state.dataLoader = false
+      })
+      .addCase(fetchGetAnswers.pending, (state) => {
+        state.dataLoader = true
+      })
   }
 })
 
@@ -88,7 +104,9 @@ export const {
   setThirdBlockParamBlockCategoryId,
   setThirdBlockParamBlockId,
   setForthBlockParamBlockCategoryId,
-  setForthBlockParamBlockId
+  setForthBlockParamBlockId,
+  setFifthBlockParamBlockCategoryId,
+  setFifthBlockParamBlockId
 } = firstParamsSlice.actions
 
 export default firstParamsSlice.reducer

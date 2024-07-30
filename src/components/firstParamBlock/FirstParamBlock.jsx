@@ -4,6 +4,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {addNewParamOption, setLong} from "../../store/mainSlice.js";
 import {selectAddNewParam} from "../../store/mainSelectors.js";
 import {
+  setFifthBlockParamBlockCategoryId,
+  setFifthBlockParamBlockId,
   setFirstBlockParamBlockId,
   setFirstBlockParamCategoryId,
   setForthBlockParamBlockCategoryId,
@@ -21,6 +23,7 @@ import {
   selectThirdBlock
 } from "../../store/firstParamsSlice/firstParam.selectors.js";
 import {
+  fetchGetAnswers,
   fetchGetFifthParams,
   fetchGetForthParams,
   fetchGetSecondParams,
@@ -93,26 +96,12 @@ export const FirstParamBlock = () => {
     dispatch(fetchGetFifthParams({block_id: value.id, category_id: value.slave}))
   }
 
-  const handleBlock5Save = () => {
+  const handleBlock5Save = (value) => {
     dispatch(setLong(false))
+    dispatch(setFifthBlockParamBlockId(value.slave))
+    dispatch(setFifthBlockParamBlockCategoryId(value.id))
+    dispatch(fetchGetAnswers(value.id))
   }
-
-
-  // const handleSetValue = () => {
-  //   if (current === 'long') {
-  //     dispatch(setLong(false))
-  //     dispatch(setSocio(true))
-  //     dispatch(setCulture(true))
-  //   } else if (current === 'socio') {
-  //     dispatch(setLong(true))
-  //     dispatch(setSocio(false))
-  //     dispatch(setCulture(true))
-  //   } else if (current === 'culture') {
-  //     dispatch(setLong(true))
-  //     dispatch(setSocio(true))
-  //     dispatch(setCulture(false))
-  //   }
-  // }
 
   return (
     <div className={styles.container}>
