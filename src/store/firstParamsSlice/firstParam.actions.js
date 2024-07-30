@@ -100,3 +100,22 @@ export const fetchGetAnswers = createAsyncThunk(
     }
   }
 );
+
+export const fetchPostGraphData = createAsyncThunk(
+  'postGraphData',
+  async (data) => {
+    try {
+      const response = await axiosMainRequest.post(`visualizations/line_and_barchart`, data);
+      if (response.status === 200) {
+        console.log(data)
+        return response.data;
+      } else {
+        console.log(data)
+        return 'error';
+      }
+    } catch (error) {
+      console.log(data)
+      return 'throwError(error)';
+    }
+  }
+);

@@ -1,9 +1,9 @@
 import ReactECharts from "echarts-for-react";
 import {useSelector} from "react-redux";
-import {selectSecondParam} from "../../store/mainSelectors.js";
+import {selectGraphData} from "../../store/firstParamsSlice/firstParam.selectors.js";
 
 export const BarChart = () => {
-  const secondParam = useSelector(selectSecondParam)
+  const graphData = useSelector(selectGraphData)
   const oneData = [
     {
       data: [120, 200, 150, 80, 70, 110, 130],
@@ -22,16 +22,20 @@ export const BarChart = () => {
     }
   ]
 
-
   const option = {
     xAxis: {
       type: 'category',
-      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+      data: graphData ? graphData.labels : null
     },
     yAxis: {
       type: 'value'
     },
-    series: secondParam ? twoData : oneData
+    series: [
+      {
+        data: graphData ? graphData.data : null,
+        type: 'bar',
+      }
+    ]
   };
 
   return (

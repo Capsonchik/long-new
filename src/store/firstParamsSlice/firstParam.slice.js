@@ -5,7 +5,8 @@ import {
   fetchGetFirstParams,
   fetchGetForthParams,
   fetchGetSecondParams,
-  fetchGetThirdParams
+  fetchGetThirdParams,
+  fetchPostGraphData
 } from "./firstParam.actions.js";
 
 
@@ -26,7 +27,13 @@ const initialState = {
   fifthBlockParamBlockId: '',
   fifthBlockParamBlockCategoryId: null,
   answers: [],
-  dataLoader: false
+  answerTitle: '',
+  dataLoader: false,
+  graphData: null,
+  dataToSend: {
+    block_6_id: [],
+    answ: []
+  }
 }
 
 export const firstParamsSlice = createSlice({
@@ -65,6 +72,15 @@ export const firstParamsSlice = createSlice({
     },
     setFifthBlockParamBlockCategoryId: (state, action) => {
       state.fifthBlockParamBlockCategoryId = action.payload
+    },
+    setAnswerTitle: (state, action) => {
+      state.answerTitle = action.payload
+    },
+    setBlockId: (state, action) => {
+      state.dataToSend.block_6_id.push(action.payload);
+    },
+    setBlockAnswers: (state, action) => {
+      state.dataToSend.answ = action.payload
     }
   },
   extraReducers: builder => {
@@ -91,6 +107,10 @@ export const firstParamsSlice = createSlice({
       .addCase(fetchGetAnswers.pending, (state) => {
         state.dataLoader = true
       })
+      .addCase(fetchPostGraphData.fulfilled, (state, action) => {
+        state.graphData = action.payload
+      })
+      
   }
 })
 
@@ -106,7 +126,10 @@ export const {
   setForthBlockParamBlockCategoryId,
   setForthBlockParamBlockId,
   setFifthBlockParamBlockCategoryId,
-  setFifthBlockParamBlockId
+  setFifthBlockParamBlockId,
+  setAnswerTitle,
+  setBlockId,
+  setBlockAnswers
 } = firstParamsSlice.actions
 
 export default firstParamsSlice.reducer

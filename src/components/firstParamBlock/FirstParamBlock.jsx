@@ -4,6 +4,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {addNewParamOption, setLong} from "../../store/mainSlice.js";
 import {selectAddNewParam} from "../../store/mainSelectors.js";
 import {
+  setAnswerTitle,
+  setBlockId,
   setFifthBlockParamBlockCategoryId,
   setFifthBlockParamBlockId,
   setFirstBlockParamBlockId,
@@ -101,6 +103,8 @@ export const FirstParamBlock = () => {
     dispatch(setFifthBlockParamBlockId(value.slave))
     dispatch(setFifthBlockParamBlockCategoryId(value.id))
     dispatch(fetchGetAnswers(value.id))
+    dispatch(setAnswerTitle(value.name))
+    dispatch(setBlockId(value.id))
   }
 
   return (
