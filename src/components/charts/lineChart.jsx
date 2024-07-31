@@ -1,17 +1,22 @@
 import ReactECharts from "echarts-for-react";
+import {useSelector} from "react-redux";
+import {selectGraphData} from "../../store/firstParamsSlice/firstParam.selectors.js";
 
 export const LineChart = () => {
+  const graphData = useSelector(selectGraphData);
+
+
   const option = {
     xAxis: {
       type: 'category',
-      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+      data: graphData ? graphData.labels : null
     },
     yAxis: {
       type: 'value'
     },
     series: [
       {
-        data: [820, 932, 901, 934, 1290, 1330, 1320],
+        data: graphData ? graphData.data : null,
         type: 'line',
         smooth: true
       }

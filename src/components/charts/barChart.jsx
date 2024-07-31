@@ -3,7 +3,7 @@ import {useSelector} from "react-redux";
 import {selectGraphData} from "../../store/firstParamsSlice/firstParam.selectors.js";
 
 export const BarChart = () => {
-  const graphData = useSelector(selectGraphData)
+  const graphData = useSelector(selectGraphData);
   const oneData = [
     {
       data: [120, 200, 150, 80, 70, 110, 130],
