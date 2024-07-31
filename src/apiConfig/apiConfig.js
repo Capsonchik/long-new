@@ -11,7 +11,7 @@ const createAxiosMainRequest = () => {
       'Accept-Language': 'ru',
       "ngrok-skip-browser-warning": 'true',
       "Access-Control-Request-Method": "GET",
-      "Origin": "https://long-new.vercel.app/"
+      "Origin": "https://long-new.vercel.app"
     },
     withCredentials: true
   });
