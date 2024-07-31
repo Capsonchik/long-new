@@ -1,5 +1,5 @@
 import styles from './styles.module.scss'
-import {Button, SelectPicker} from "rsuite";
+import {SelectPicker} from "rsuite";
 import {useDispatch, useSelector} from "react-redux";
 import {addNewParamOption, setLong} from "../../store/mainSlice.js";
 import {selectAddNewParam} from "../../store/mainSelectors.js";
@@ -12,6 +12,7 @@ import {
   setFirstBlockParamCategoryId,
   setForthBlockParamBlockCategoryId,
   setForthBlockParamBlockId,
+  setIsFirstParamDone,
   setSecondBlockParamBlockCategoryId,
   setSecondBlockParamBlockId,
   setThirdBlockParamBlockCategoryId,
@@ -70,10 +71,10 @@ export const FirstParamBlock = () => {
   const isAddNewParam = useSelector(selectAddNewParam);
 
 
-  const handleSetNewParam = () => {
-    dispatch(addNewParamOption(!isAddNewParam))
-    dispatch(fetchGetNextFirstParams())
-  }
+  // const handleSetNewParam = () => {
+  //   dispatch(addNewParamOption(!isAddNewParam))
+  //   dispatch(fetchGetNextFirstParams())
+  // }
 
 
   const handleSegmentSave = (value) => {
@@ -107,14 +108,17 @@ export const FirstParamBlock = () => {
     dispatch(fetchGetAnswers(value.id))
     dispatch(setAnswerTitle(value.name))
     dispatch(setBlockId(value.id))
+    dispatch(setIsFirstParamDone(true))
+    dispatch(addNewParamOption(!isAddNewParam))
+    dispatch(fetchGetNextFirstParams())
   }
 
   return (
     <div className={styles.container}>
       <span>Выбор параметра 1</span>
-      <Button color={'orange'} appearance={"primary"} onClick={handleSetNewParam} className={styles.btn}>
-        {!isAddNewParam ? 'Открыть дополнительный параметр' : 'Скрыть параметр'}
-      </Button>
+      {/*<Button color={'orange'} appearance={"primary"} onClick={handleSetNewParam} className={styles.btn}>*/}
+      {/*  {!isAddNewParam ? 'Открыть дополнительный параметр' : 'Скрыть параметр'}*/}
+      {/*</Button>*/}
       <SelectPicker
         className={styles.picker}
         data={firstParamData}

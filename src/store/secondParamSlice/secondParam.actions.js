@@ -84,3 +84,19 @@ export const fetchGetNextFifthParams = createAsyncThunk(
     }
   }
 );
+
+export const fetchGetNextAnswers = createAsyncThunk(
+  'nextAnswers',
+  async (id) => {
+    try {
+      const response = await axiosMainRequest.get(`navigator/get_question_variants/?question_id=${id}`);
+      if (response.status === 200) {
+        return response.data;
+      } else {
+        return 'error';
+      }
+    } catch (error) {
+      return 'throwError(error)';
+    }
+  }
+);

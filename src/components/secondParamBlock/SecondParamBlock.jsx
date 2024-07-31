@@ -1,6 +1,5 @@
 import styles from './styles.module.scss';
 import {SelectPicker} from "rsuite";
-import {BLOCK_1_PARAMS} from "../../mocks/paramsMock.js";
 import {useDispatch, useSelector} from "react-redux";
 import {
   selectNextFifthParam,
@@ -10,6 +9,10 @@ import {
   selectNextThirdParam
 } from "../../store/secondParamSlice/secondParamSelectors.js";
 import {
+  setIsSecondParamDone,
+  setNextAnswerTitle,
+  setNextParamFifthBlockParamBlockCategoryId,
+  setNextParamFifthBlockParamBlockId,
   setNextParamFirstBlockParamBlockCategoryId,
   setNextParamFirstBlockParamBlockId,
   setNextParamForthBlockParamBlockId,
@@ -19,11 +22,13 @@ import {
   setNextParamThirdBlockParamBlockId
 } from "../../store/secondParamSlice/secondParam.slice.js";
 import {
+  fetchGetNextAnswers,
   fetchGetNextFifthParams,
   fetchGetNextForthParams,
   fetchGetNextSecondParams,
   fetchGetNextThirdParams
 } from "../../store/secondParamSlice/secondParam.actions.js";
+import {selectIsFirstParamDone} from "../../store/firstParamsSlice/firstParam.selectors.js";
 
 
 export const SecondParamBlock = () => {
@@ -33,6 +38,7 @@ export const SecondParamBlock = () => {
   const thirdParam = useSelector(selectNextThirdParam);
   const forthParam = useSelector(selectNextForthParam);
   const fifthParam = useSelector(selectNextFifthParam);
+  const isFirstParamDone = useSelector(selectIsFirstParamDone);
 
 
   const firstParamData = firstParam && firstParam.map(item => ({
@@ -84,40 +90,51 @@ export const SecondParamBlock = () => {
     dispatch(fetchGetNextFifthParams({block_id: value.id, category_id: value.slave}))
   }
 
-
-  const data = BLOCK_1_PARAMS.map(item => ({label: item, value: item}));
+  const handleBlcok5Save = (value) => {
+    dispatch(setIsSecondParamDone(true))
+    dispatch(setNextParamFifthBlockParamBlockId(value.slave))
+    dispatch(setNextParamFifthBlockParamBlockCategoryId(value.id))
+    dispatch(fetchGetNextAnswers(value.id))
+    dispatch(setNextAnswerTitle(value.name))
+  }
 
   return (
     <div className={styles.container}>
       <span className={styles.topBtn}>Выбор параметра 2</span>
       <SelectPicker
+        disabled={!isFirstParamDone}
         onChange={handleSegmentSave}
         className={styles.picker}
         data={firstParamData}
-        placeholder={'Сегмент'}
+        placeholder={isFirstParamDone ? 'Сегмент' : 'Заполните первый параметр'}
       />
       <SelectPicker
+        disabled={!isFirstParamDone}
         onChange={handleCategorySave}
         className={styles.picker}
         data={secondParamData}
-        placeholder={'Категория'}
+        placeholder={isFirstParamDone ? 'Категория' : 'Заполните первый параметр'}
       />
       <SelectPicker
+        disabled={!isFirstParamDone}
         onChange={handleBlock3Save}
         className={styles.picker}
         data={thirdParamData}
-        placeholder={'Подкатегория'}
+        placeholder={isFirstParamDone ? 'Подкатегория' : 'Заполните первый параметр'}
       />
       <SelectPicker
+        disabled={!isFirstParamDone}
         onChange={handleBlock4Save}
         className={styles.picker}
         data={forthParamData}
-        placeholder={'Группа параметров'}
+        placeholder={isFirstParamDone ? 'Группа параметров' : 'Заполните первый параметр'}
       />
       <SelectPicker
+        disabled={!isFirstParamDone}
+        onChange={handleBlcok5Save}
         className={styles.picker}
         data={fifthParamData}
-        placeholder={'Параметр'}
+        placeholder={isFirstParamDone ? 'Параметр' : 'Заполните первый параметр'}
       />
     </div>
   );

@@ -1,5 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {
+  fetchGetNextAnswers,
   fetchGetNextFifthParams,
   fetchGetNextFirstParams,
   fetchGetNextForthParams,
@@ -30,7 +31,10 @@ const initialState = {
   dataToSend: {
     block_6_id: [],
     answ: []
-  }
+  },
+  isParamDone: false,
+  answers: [],
+  answerTitle: '',
 }
 
 export const secondParamsSlice = createSlice({
@@ -66,6 +70,12 @@ export const secondParamsSlice = createSlice({
     },
     setNextParamFifthBlockParamBlockCategoryId: (state, action) => {
       state.nextParamFifthBlockParamBlockCategoryId = action.payload
+    },
+    setIsSecondParamDone: (state, action) => {
+      state.isParamDone = action.payload
+    },
+    setNextAnswerTitle: (state, action) => {
+      state.answerTitle = action.payload
     }
 
   },
@@ -86,6 +96,9 @@ export const secondParamsSlice = createSlice({
       .addCase(fetchGetNextFifthParams.fulfilled, (state, action) => {
         state.nextParamFifthBlock = action.payload
       })
+      .addCase(fetchGetNextAnswers.fulfilled, (state, action) => {
+        state.answers = action.payload
+      })
 })
 
 export const {
@@ -99,5 +112,7 @@ export const {
   setNextParamSecondBlockParamBlockId,
   setNextParamThirdBlockParamBlockCategoryId,
   setNextParamFifthBlockParamBlockCategoryId,
+  setIsSecondParamDone,
+  setNextAnswerTitle
 } = secondParamsSlice.actions
 export default secondParamsSlice.reducer

@@ -33,7 +33,8 @@ const initialState = {
   dataToSend: {
     block_6_id: [],
     answ: []
-  }
+  },
+  isFirstParamDone: false
 }
 
 export const firstParamsSlice = createSlice({
@@ -81,6 +82,9 @@ export const firstParamsSlice = createSlice({
     },
     setBlockAnswers: (state, action) => {
       state.dataToSend.answ = action.payload
+    },
+    setIsFirstParamDone: (state, action) => {
+      state.isFirstParamDone = action.payload
     }
   },
   extraReducers: builder => {
@@ -110,7 +114,7 @@ export const firstParamsSlice = createSlice({
       .addCase(fetchPostGraphData.fulfilled, (state, action) => {
         state.graphData = action.payload
       })
-      
+
   }
 })
 
@@ -129,7 +133,8 @@ export const {
   setFifthBlockParamBlockId,
   setAnswerTitle,
   setBlockId,
-  setBlockAnswers
+  setBlockAnswers,
+  setIsFirstParamDone
 } = firstParamsSlice.actions
 
 export default firstParamsSlice.reducer
