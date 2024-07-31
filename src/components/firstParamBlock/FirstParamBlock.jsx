@@ -31,6 +31,7 @@ import {
   fetchGetSecondParams,
   fetchGetThirdParams
 } from "../../store/firstParamsSlice/firstParam.actions.js";
+import {fetchGetNextFirstParams} from "../../store/secondParamSlice/secondParam.actions.js";
 
 
 export const FirstParamBlock = () => {
@@ -71,6 +72,7 @@ export const FirstParamBlock = () => {
 
   const handleSetNewParam = () => {
     dispatch(addNewParamOption(!isAddNewParam))
+    dispatch(fetchGetNextFirstParams())
   }
 
 
