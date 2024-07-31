@@ -10,6 +10,7 @@ const createAxiosMainRequest = () => {
       'Content-Type': 'application/json',
       'Accept-Language': 'ru',
       "ngrok-skip-browser-warning": 'true',
+      "Access-Control-Request-Method": "GET"
     },
     withCredentials: true
   });
