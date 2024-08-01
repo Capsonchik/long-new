@@ -29,6 +29,7 @@ import {
   fetchGetNextThirdParams
 } from "../../store/secondParamSlice/secondParam.actions.js";
 import {selectIsFirstParamDone} from "../../store/firstParamsSlice/firstParam.selectors.js";
+import {setQuestion2} from "../../store/firstParamsSlice/firstParam.slice.js";
 
 
 export const SecondParamBlock = () => {
@@ -94,6 +95,7 @@ export const SecondParamBlock = () => {
     dispatch(setIsSecondParamDone(true))
     dispatch(setNextParamFifthBlockParamBlockId(value.slave))
     dispatch(setNextParamFifthBlockParamBlockCategoryId(value.id))
+    dispatch(setQuestion2(value.id))
     dispatch(fetchGetNextAnswers(value.id))
     dispatch(setNextAnswerTitle(value.name))
   }

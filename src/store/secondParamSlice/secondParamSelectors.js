@@ -4,3 +4,5 @@ export const selectNextThirdParam = (state) => state.secondParam.nextParamThirdB
 export const selectNextForthParam = (state) => state.secondParam.nextParamForthBlock;
 export const selectNextFifthParam = (state) => state.secondParam.nextParamFifthBlock;
 export const selectIsSecondParamDone = (state) => state.secondParam.isParamDone;
+export const selectNextAnswerTitle = (state) => state.secondParam.answerTitle;
+export const selectNextAnswers = (state) => state.secondParam.answers;

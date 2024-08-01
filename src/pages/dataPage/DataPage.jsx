@@ -1,55 +1,53 @@
 import styles from './styles.module.scss';
 import {Header} from "../../components/header/Header.jsx";
-import {Button, CheckPicker, SelectPicker} from "rsuite";
+import {Button, CheckPicker} from "rsuite";
 import {FaChartBar, FaChartLine} from "react-icons/fa";
 import {useDispatch, useSelector} from "react-redux";
 import {setCurrentGraph} from "../../store/mainSlice.js";
 import {BarChart} from "../../components/charts/barChart.jsx";
-import {selectCurrentGraph, selectSecondParam} from "../../store/mainSelectors.js";
+import {selectCurrentGraph} from "../../store/mainSelectors.js";
 import {LineChart} from "../../components/charts/lineChart.jsx";
-import {selectAnswers, selectAnswerTitle, selectDataToSend} from "../../store/firstParamsSlice/firstParam.selectors.js";
-import {useEffect, useState} from "react";
-import {setBlockAnswers} from "../../store/firstParamsSlice/firstParam.slice.js";
+import {
+  selectAnswers,
+  selectAnswerTitle,
+  selectDataToSend,
+} from "../../store/firstParamsSlice/firstParam.selectors.js";
+import {setAnsw1, setAnsw2} from "../../store/firstParamsSlice/firstParam.slice.js";
 import {fetchPostGraphData} from "../../store/firstParamsSlice/firstParam.actions.js";
+import {selectNextAnswers, selectNextAnswerTitle} from "../../store/secondParamSlice/secondParamSelectors.js";
 
 export const DataPage = () => {
   const dispatch = useDispatch();
-  const secondParam = useSelector(selectSecondParam);
   const currentGraph = useSelector(selectCurrentGraph);
   const answers = useSelector(selectAnswers);
   const answerTitle = useSelector(selectAnswerTitle);
   const dataToSend = useSelector(selectDataToSend);
-
-  const [currentAnswer, setCurrentAnswer] = useState([])
+  const nextAnswerTitle = useSelector(selectNextAnswerTitle);
+  const nextAnswers = useSelector(selectNextAnswers);
 
   const answersData = answers && answers.map(
     item => ({label: item.response, value: item.response}),
   )
 
-  const data = [
-    'Eugenia',
-    'Bryan',
-    'Linda',
-    'Nancy',
-    'Lloyd',
-    'Alice',
-  ].map(item => ({label: item, value: item}));
+  const nextAnswersData = nextAnswers && nextAnswers.map(
+    item => ({label: item.response, value: item.response}),
+  )
 
   const handleAddValue = (value) => {
-    setCurrentAnswer(value)
-    dispatch(setBlockAnswers(value))
+    // dispatch(setBlockAnswers(value))
+    console.log(value)
+    dispatch(setAnsw1(value))
   }
 
-  useEffect(() => {
-    console.log(currentAnswer)
-  }, [currentAnswer]);
+  const handleAddNextValue = (value) => {
+    dispatch(setAnsw2(value))
+  }
 
   const handleSendAnswer = () => {
     if (dataToSend) {
       dispatch(fetchPostGraphData(dataToSend))
       console.log(dataToSend)
     }
-
   }
 
   return (
@@ -60,13 +58,9 @@ export const DataPage = () => {
           <span className={styles.paramsBlockTitle}>Настройка параметров</span>
           <span>{answerTitle ? answerTitle : 'Сперва нужно выбрать вопрос'}</span>
           <CheckPicker data={answersData} onChange={handleAddValue} placeholder={'Варианты ответа'}/>
+          <span>{nextAnswerTitle ? nextAnswerTitle : 'Ошибка обработки запроса'}</span>
+          <CheckPicker data={nextAnswersData} onChange={handleAddNextValue} placeholder={'Варианты ответа'}/>
           <Button onClick={handleSendAnswer}>Подтвердить</Button>
-          <SelectPicker data={data} placeholder={'Параметр 1'}/>
-          {secondParam ? (
-            <div className={styles.secondParam}>
-              <SelectPicker style={{width: '100%'}} data={data} placeholder={'Параметр 2'}/>
-            </div>
-          ) : null}
           <span className={styles.paramsBlockGraph}>График для вывода</span>
           <div className={styles.btnsGroop}>
             <Button onClick={() => dispatch(setCurrentGraph('line'))} className={styles.btn}>
@@ -78,15 +72,6 @@ export const DataPage = () => {
           </div>
         </div>
         <div className={styles.graphBlock}>
-          <div>
-            {currentGraph === 'bar' ? <BarChart/> : <LineChart/>}
-          </div>
-          <div>
-            {currentGraph === 'bar' ? <BarChart/> : <LineChart/>}
-          </div>
-          <div>
-            {currentGraph === 'bar' ? <BarChart/> : <LineChart/>}
-          </div>
           <div>
             {currentGraph === 'bar' ? <BarChart/> : <LineChart/>}
           </div>

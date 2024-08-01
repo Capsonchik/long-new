@@ -13,9 +13,11 @@ import {ExternalFactors} from "./components/externalFactors/ExternalFactors.jsx"
 import {Header} from "./components/header/Header.jsx";
 import {useEffect} from "react";
 import {fetchGetFirstParams} from "./store/firstParamsSlice/firstParam.actions.js";
+import {selectIsFirstParamDone} from "./store/firstParamsSlice/firstParam.selectors.js";
 
 export const App = () => {
   const isAddNewParam = useSelector(selectAddNewParam);
+  const isFirstParamDone = useSelector(selectIsFirstParamDone);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -42,7 +44,7 @@ export const App = () => {
               <FirstParamBlock/>
             </div>
             <div className={styles.block2}>
-              {isAddNewParam
+              {isFirstParamDone
                 ? <SecondParamBlock/>
                 : (
                   <>

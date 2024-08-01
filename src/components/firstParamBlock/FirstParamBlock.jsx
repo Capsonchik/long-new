@@ -1,7 +1,7 @@
 import styles from './styles.module.scss'
 import {SelectPicker} from "rsuite";
 import {useDispatch, useSelector} from "react-redux";
-import {addNewParamOption, setLong} from "../../store/mainSlice.js";
+import {setLong} from "../../store/mainSlice.js";
 import {selectAddNewParam} from "../../store/mainSelectors.js";
 import {
   setAnswerTitle,
@@ -13,6 +13,7 @@ import {
   setForthBlockParamBlockCategoryId,
   setForthBlockParamBlockId,
   setIsFirstParamDone,
+  setQuestion1,
   setSecondBlockParamBlockCategoryId,
   setSecondBlockParamBlockId,
   setThirdBlockParamBlockCategoryId,
@@ -102,15 +103,18 @@ export const FirstParamBlock = () => {
   }
 
   const handleBlock5Save = (value) => {
+    dispatch(setQuestion1(value.id))
+    dispatch(setIsFirstParamDone(true))
+    dispatch(fetchGetNextFirstParams())
     dispatch(setLong(false))
     dispatch(setFifthBlockParamBlockId(value.slave))
     dispatch(setFifthBlockParamBlockCategoryId(value.id))
     dispatch(fetchGetAnswers(value.id))
     dispatch(setAnswerTitle(value.name))
     dispatch(setBlockId(value.id))
-    dispatch(setIsFirstParamDone(true))
-    dispatch(addNewParamOption(!isAddNewParam))
-    dispatch(fetchGetNextFirstParams())
+
+    // dispatch(addNewParamOption(!isAddNewParam))
+
   }
 
   return (

@@ -31,8 +31,10 @@ const initialState = {
   dataLoader: false,
   graphData: null,
   dataToSend: {
-    block_6_id: [],
-    answ: []
+    question1: null,
+    question2: null,
+    answ1: [],
+    answ2: []
   },
   isFirstParamDone: false
 }
@@ -77,11 +79,17 @@ export const firstParamsSlice = createSlice({
     setAnswerTitle: (state, action) => {
       state.answerTitle = action.payload
     },
-    setBlockId: (state, action) => {
-      state.dataToSend.block_6_id.push(action.payload);
+    setQuestion1: (state, action) => {
+      state.dataToSend.question1 = action.payload;
     },
-    setBlockAnswers: (state, action) => {
-      state.dataToSend.answ = action.payload
+    setQuestion2: (state, action) => {
+      state.dataToSend.question2 = action.payload;
+    },
+    setAnsw1: (state, action) => {
+      state.dataToSend.answ1 = action.payload;
+    },
+    setAnsw2: (state, action) => {
+      state.dataToSend.answ2 = action.payload;
     },
     setIsFirstParamDone: (state, action) => {
       state.isFirstParamDone = action.payload
@@ -134,7 +142,11 @@ export const {
   setAnswerTitle,
   setBlockId,
   setBlockAnswers,
-  setIsFirstParamDone
+  setIsFirstParamDone,
+  setAnsw1,
+  setAnsw2,
+  setQuestion1,
+  setQuestion2
 } = firstParamsSlice.actions
 
 export default firstParamsSlice.reducer
