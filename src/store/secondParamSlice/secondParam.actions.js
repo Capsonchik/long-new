@@ -100,3 +100,19 @@ export const fetchGetNextAnswers = createAsyncThunk(
     }
   }
 );
+
+export const fetchPostNextGraphData = createAsyncThunk(
+  'postGraphInfo',
+  async (data) => {
+    try {
+      const response = await axiosMainRequest.post(`visualizations/crosstabulation_barcharts/`, data);
+      if (response.status === 200) {
+        return response.data;
+      } else {
+        return 'error';
+      }
+    } catch (error) {
+      return 'throwError(error)';
+    }
+  }
+);

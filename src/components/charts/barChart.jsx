@@ -1,44 +1,80 @@
 import ReactECharts from "echarts-for-react";
 import {useSelector} from "react-redux";
-import {selectGraphData} from "../../store/firstParamsSlice/firstParam.selectors.js";
+import {selectFormatter, selectNextParamGraphData} from "../../store/secondParamSlice/secondParamSelectors.js";
 
 export const BarChart = () => {
-  const graphData = useSelector(selectGraphData);
-  const oneData = [
-    {
-      data: [120, 200, 150, 80, 70, 110, 130],
-      type: 'bar'
-    }
-  ]
+  const nextGraphData = useSelector(selectNextParamGraphData);
+  const formatter = useSelector(selectFormatter);
 
-  const twoData = [
-    {
-      data: [120, 200, 150, 80, 70, 110, 130],
-      type: 'bar'
-    },
-    {
-      data: [120, 200, 150, 80, 70, 110, 130],
-      type: 'bar'
-    }
-  ]
+  // const transformedDataNumber = nextGraphData && nextGraphData.data.map((item) => ({
+  //
+  //   name: item.label,
+  //   type: 'bar',
+  //   stack: 'total',
+  //   label: {
+  //     show: true,
+  //     formatter: '{c}%'
+  //   },
+  //   emphasis: {
+  //     focus: 'series'
+  //   },
+  //   data: item.stat
+  // }));
+
+  const transformedData = nextGraphData && nextGraphData.data.map((item) => {
+    const total = item.stat.reduce((sum, value) => sum + value, 0);
+    const percentageData = item.stat.map((value) => (value / total) * 100);
+
+
+    return {
+      name: item.label,
+      type: 'bar',
+      stack: 'total',
+      label: {
+        show: true,
+        formatter: ({value}) => `${value.toFixed(2)}%`
+      },
+      emphasis: {
+        focus: 'series'
+      },
+      data: percentageData
+    };
+  });
+
+  console.log('transformedData', transformedData);
 
   const option = {
-    xAxis: {
-      type: 'category',
-      data: graphData ? graphData.labels : null
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: {
+        type: 'shadow'
+      },
+      formatter: (params) => {
+        let tooltipText = '';
+        params.forEach(param => {
+          tooltipText += `${param.seriesName}: ${param.value.toFixed(2)}%<br/>`;
+        });
+        return tooltipText;
+      }
     },
-    yAxis: {
+    legend: {},
+    grid: {
+      left: '3%',
+      right: '4%',
+      bottom: '3%',
+      containLabel: true
+    },
+    xAxis: {
       type: 'value'
     },
-    series: [
-      {
-        data: graphData ? graphData.data : null,
-        type: 'bar',
-      }
-    ]
+    yAxis: {
+      type: 'category',
+      data: nextGraphData ? nextGraphData.labels : null,
+    },
+    series: nextGraphData ? transformedData : null
   };
 
   return (
-    <ReactECharts style={{height: 300}} option={option}/>
+    <ReactECharts style={{height: 500}} option={option}/>
   );
 };

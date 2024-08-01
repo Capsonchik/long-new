@@ -5,7 +5,8 @@ import {
   fetchGetNextFirstParams,
   fetchGetNextForthParams,
   fetchGetNextSecondParams,
-  fetchGetNextThirdParams
+  fetchGetNextThirdParams,
+  fetchPostNextGraphData
 } from "./secondParam.actions.js";
 
 const initialState = {
@@ -35,6 +36,8 @@ const initialState = {
   isParamDone: false,
   answers: [],
   answerTitle: '',
+  formatter: 'percentage'
+
 }
 
 export const secondParamsSlice = createSlice({
@@ -76,6 +79,9 @@ export const secondParamsSlice = createSlice({
     },
     setNextAnswerTitle: (state, action) => {
       state.answerTitle = action.payload
+    },
+    setFormatter: (state, action) => {
+      state.formatter = action.payload
     }
 
   },
@@ -99,6 +105,9 @@ export const secondParamsSlice = createSlice({
       .addCase(fetchGetNextAnswers.fulfilled, (state, action) => {
         state.answers = action.payload
       })
+      .addCase(fetchPostNextGraphData.fulfilled, (state, action) => {
+        state.nextParamGraphData = action.payload
+      })
 })
 
 export const {
@@ -113,6 +122,7 @@ export const {
   setNextParamThirdBlockParamBlockCategoryId,
   setNextParamFifthBlockParamBlockCategoryId,
   setIsSecondParamDone,
-  setNextAnswerTitle
+  setNextAnswerTitle,
+  setFormatter
 } = secondParamsSlice.actions
 export default secondParamsSlice.reducer

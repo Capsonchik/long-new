@@ -6,3 +6,5 @@ export const selectNextFifthParam = (state) => state.secondParam.nextParamFifthB
 export const selectIsSecondParamDone = (state) => state.secondParam.isParamDone;
 export const selectNextAnswerTitle = (state) => state.secondParam.answerTitle;
 export const selectNextAnswers = (state) => state.secondParam.answers;
+export const selectNextParamGraphData = (state) => state.secondParam.nextParamGraphData;
+export const selectFormatter = (state) => state.formatter;

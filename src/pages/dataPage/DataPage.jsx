@@ -1,9 +1,7 @@
 import styles from './styles.module.scss';
 import {Header} from "../../components/header/Header.jsx";
 import {Button, CheckPicker} from "rsuite";
-import {FaChartBar, FaChartLine} from "react-icons/fa";
 import {useDispatch, useSelector} from "react-redux";
-import {setCurrentGraph} from "../../store/mainSlice.js";
 import {BarChart} from "../../components/charts/barChart.jsx";
 import {selectCurrentGraph} from "../../store/mainSelectors.js";
 import {LineChart} from "../../components/charts/lineChart.jsx";
@@ -13,8 +11,8 @@ import {
   selectDataToSend,
 } from "../../store/firstParamsSlice/firstParam.selectors.js";
 import {setAnsw1, setAnsw2} from "../../store/firstParamsSlice/firstParam.slice.js";
-import {fetchPostGraphData} from "../../store/firstParamsSlice/firstParam.actions.js";
 import {selectNextAnswers, selectNextAnswerTitle} from "../../store/secondParamSlice/secondParamSelectors.js";
+import {fetchPostNextGraphData} from "../../store/secondParamSlice/secondParam.actions.js";
 
 export const DataPage = () => {
   const dispatch = useDispatch();
@@ -45,7 +43,7 @@ export const DataPage = () => {
 
   const handleSendAnswer = () => {
     if (dataToSend) {
-      dispatch(fetchPostGraphData(dataToSend))
+      dispatch(fetchPostNextGraphData(dataToSend))
       console.log(dataToSend)
     }
   }
@@ -62,16 +60,21 @@ export const DataPage = () => {
           <CheckPicker data={nextAnswersData} onChange={handleAddNextValue} placeholder={'Варианты ответа'}/>
           <Button onClick={handleSendAnswer}>Подтвердить</Button>
           <span className={styles.paramsBlockGraph}>График для вывода</span>
-          <div className={styles.btnsGroop}>
-            <Button onClick={() => dispatch(setCurrentGraph('line'))} className={styles.btn}>
-              <FaChartLine style={{fontSize: 40, cursor: 'pointer'}}/>
-            </Button>
-            <Button onClick={() => dispatch(setCurrentGraph('bar'))} className={styles.btn}>
-              <FaChartBar style={{fontSize: 40, cursor: 'pointer'}}/>
-            </Button>
-          </div>
+          {/*<div className={styles.btnsGroop}>*/}
+          {/*  <Button onClick={() => dispatch(setCurrentGraph('line'))} className={styles.btn}>*/}
+          {/*    <FaChartLine style={{fontSize: 40, cursor: 'pointer'}}/>*/}
+          {/*  </Button>*/}
+          {/*  <Button onClick={() => dispatch(setCurrentGraph('bar'))} className={styles.btn}>*/}
+          {/*    <FaChartBar style={{fontSize: 40, cursor: 'pointer'}}/>*/}
+          {/*  </Button>*/}
+          {/*</div>*/}
         </div>
         <div className={styles.graphBlock}>
+
+          {/*<div className={styles.topBtns}>*/}
+          {/*  <Button onClick={() => dispatch(setFormatter('percent'))}>Проценты</Button>*/}
+          {/*  <Button onClick={() => dispatch(setFormatter('number'))}>Числа</Button>*/}
+          {/*</div>*/}
           <div>
             {currentGraph === 'bar' ? <BarChart/> : <LineChart/>}
           </div>
