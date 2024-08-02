@@ -32,12 +32,12 @@ export const BarChart = () => {
       stack: 'total',
       label: {
         show: true,
-        formatter: ({value}) => `${value.toFixed(2)}%`
+        // formatter: ({value}) => `${value.toFixed(2)}%`
       },
       emphasis: {
         focus: 'series'
       },
-      data: percentageData
+      data: item.stat
     };
   });
 
@@ -49,13 +49,13 @@ export const BarChart = () => {
       axisPointer: {
         type: 'shadow'
       },
-      formatter: (params) => {
-        let tooltipText = '';
-        params.forEach(param => {
-          tooltipText += `${param.seriesName}: ${param.value.toFixed(2)}%<br/>`;
-        });
-        return tooltipText;
-      }
+      // formatter: (params) => {
+      //   let tooltipText = '';
+      //   params.forEach(param => {
+      //     tooltipText += `${param.seriesName}: ${param.value.toFixed(2)}%<br/>`;
+      //   });
+      //   return tooltipText;
+      // }
     },
     legend: {},
     grid: {
