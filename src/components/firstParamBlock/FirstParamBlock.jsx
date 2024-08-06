@@ -43,7 +43,7 @@ export const FirstParamBlock = () => {
   const forthParam = useSelector(selectForthParam);
   const fifthParam = useSelector(selectFifthParam);
 
-  const source = ['Наши данные', 'Лонгитюдные данные']
+  const source = ['Лонгитюдная система']
 
   const sourceData = source.map(item => ({
     label: item,

@@ -43,7 +43,7 @@ export const Block3Component = () => {
         <span>Получение отчета</span>
         <div className={styles.buttonsBlock}>
           <Button className={styles.button} appearance={'primary'} color={'orange'}>График</Button>
-          <Button className={styles.button} appearance={'primary'} color={'orange'}>Exel файл</Button>
+          <Button className={styles.button} appearance={'primary'} color={'orange'}>Excel файл</Button>
         </div>
       </div>
     </div>

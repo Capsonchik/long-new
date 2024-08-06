@@ -30,23 +30,13 @@ export const ExternalFactors = () => {
           <Button onClick={handleNavigate} disabled={socio} color="orange" appearance="primary"
                   className={styles.btn}>Хи-квадрат</Button>
           <Button onClick={handleNavigate} disabled={culture} color="orange" appearance="primary"
-                  className={styles.btn}>Ф-тест</Button>
+                  className={styles.btn}>Корреляция</Button>
           <Button onClick={handleNavigate} disabled={culture} color="orange" appearance="primary"
-                  className={styles.btn}>Ф-тест</Button>
+                  className={styles.btn}>Ф-тест Фишера</Button>
           <Button onClick={handleNavigate} disabled={culture} color="orange" appearance="primary"
-                  className={styles.btn}>Ф-тест</Button>
+                  className={styles.btn}>------</Button>
         </div>
       </div>
-      {/*<div className={styles.factors}>*/}
-      {/*  <span>Внешние факторы</span>*/}
-      {/*  <div className={styles.factorsContent}>*/}
-      {/*    <Button disabled className={styles.btn}>test</Button>*/}
-      {/*    <Button disabled className={styles.btn}>test</Button>*/}
-      {/*    <Button disabled className={styles.btn}>test</Button>*/}
-      {/*    <Button disabled className={styles.btn}>test</Button>*/}
-      {/*    <Button disabled className={styles.btn}>test</Button>*/}
-      {/*  </div>*/}
-      {/*</div>*/}
     </div>
   );
 };

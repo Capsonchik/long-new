@@ -41,6 +41,12 @@ export const SecondParamBlock = () => {
   const fifthParam = useSelector(selectNextFifthParam);
   const isFirstParamDone = useSelector(selectIsFirstParamDone);
 
+  const source = ['Лонгитюдная система']
+
+  const sourceData = source.map(item => ({
+    label: item,
+    value: {id: item, name: item, slave: item},
+  }))
 
   const firstParamData = firstParam && firstParam.map(item => ({
     label: item.category_name,
@@ -103,6 +109,12 @@ export const SecondParamBlock = () => {
   return (
     <div className={styles.container}>
       <span className={styles.topBtn}>Выбор параметра 2</span>
+      <SelectPicker
+        disabled={!isFirstParamDone}
+        className={styles.picker}
+        data={sourceData}
+        placeholder={isFirstParamDone ? 'Сегмент' : 'Заполните первый параметр'}
+      />
       <SelectPicker
         disabled={!isFirstParamDone}
         onChange={handleSegmentSave}

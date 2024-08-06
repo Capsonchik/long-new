@@ -41,40 +41,17 @@ export const App = () => {
               <FirstParamBlock/>
             </div>
             <div className={styles.block2}>
-              {/*{isFirstParamDone*/}
-              {/*  ? <SecondParamBlock/>*/}
-              {/*  : (*/}
-              {/*    <>*/}
-              {/*      <div>*/}
-              {/*        <PieChart/>*/}
-              {/*      </div>*/}
-              {/*      <div className={styles.blockPicker}>*/}
-              {/*        <CheckPicker data={data} style={{width: 224}} placeholder={'Выберите дату'}/>*/}
-              {/*      </div>*/}
-              {/*    </>*/}
-              {/*  )*/}
-              {/*}*/}
               <SecondParamBlock/>
             </div>
+          </div>
+          <div className={styles.concatBlocksTitle}>
+            <span style={{fontSize: 'x-large'}}>Выбор параметров в Лонгитюдном круге</span>
           </div>
           <div className={styles.concatBot}>
             <ExternalFactors/>
           </div>
-
         </div>
         <div className={styles.block3}>
-          {/*<div className={styles.block3Filters}>*/}
-          {/*  <div className={styles.block3Left}>*/}
-          {/*    <Period/>*/}
-          {/*  </div>*/}
-          {/*  <div className={styles.block3Right}>*/}
-          {/*    <Space/>*/}
-          {/*  </div>*/}
-          {/*</div>*/}
-          {/*<div className={styles.block3Filters}>*/}
-          {/*  <Button disabled color={'orange'} appearance={'primary'} className={styles.btn}>График</Button>*/}
-          {/*  <Button disabled color={'orange'} appearance={'primary'} className={styles.btn}>Exel таблица</Button>*/}
-          {/*</div>*/}
           <Block3Component/>
         </div>
       </div>
