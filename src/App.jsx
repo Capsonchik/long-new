@@ -1,10 +1,7 @@
 import './App.css'
 import 'rsuite/dist/rsuite.min.css';
 import styles from './styles.module.scss';
-import {Button} from "rsuite";
 import {FirstParamBlock} from "./components/firstParamBlock/FirstParamBlock.jsx";
-import {Period} from "./components/block3/period/Period.jsx";
-import {Space} from "./components/block3/space/Space.jsx";
 import {useDispatch, useSelector} from "react-redux";
 import {selectAddNewParam} from "./store/mainSelectors.js";
 import {SecondParamBlock} from "./components/secondParamBlock/SecondParamBlock.jsx";
@@ -13,6 +10,7 @@ import {Header} from "./components/header/Header.jsx";
 import {useEffect} from "react";
 import {fetchGetFirstParams} from "./store/firstParamsSlice/firstParam.actions.js";
 import {selectIsFirstParamDone} from "./store/firstParamsSlice/firstParam.selectors.js";
+import {Block3Component} from "./components/block3/Block3Component.jsx";
 
 export const App = () => {
   const isAddNewParam = useSelector(selectAddNewParam);
@@ -65,18 +63,19 @@ export const App = () => {
 
         </div>
         <div className={styles.block3}>
-          <div className={styles.block3Filters}>
-            <div className={styles.block3Left}>
-              <Period/>
-            </div>
-            <div className={styles.block3Right}>
-              <Space/>
-            </div>
-          </div>
-          <div className={styles.block3Filters}>
-            <Button disabled color={'orange'} appearance={'primary'} className={styles.btn}>График</Button>
-            <Button disabled color={'orange'} appearance={'primary'} className={styles.btn}>Exel таблица</Button>
-          </div>
+          {/*<div className={styles.block3Filters}>*/}
+          {/*  <div className={styles.block3Left}>*/}
+          {/*    <Period/>*/}
+          {/*  </div>*/}
+          {/*  <div className={styles.block3Right}>*/}
+          {/*    <Space/>*/}
+          {/*  </div>*/}
+          {/*</div>*/}
+          {/*<div className={styles.block3Filters}>*/}
+          {/*  <Button disabled color={'orange'} appearance={'primary'} className={styles.btn}>График</Button>*/}
+          {/*  <Button disabled color={'orange'} appearance={'primary'} className={styles.btn}>Exel таблица</Button>*/}
+          {/*</div>*/}
+          <Block3Component/>
         </div>
       </div>
     </div>
