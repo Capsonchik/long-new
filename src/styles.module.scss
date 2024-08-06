@@ -3,6 +3,7 @@
   margin: 0 auto;
   padding-top: 5px;
   padding-bottom: 5px;
+  height: calc(100vh - 10px);
 }
 
 .header {
@@ -77,4 +78,10 @@
 
 .block3Right {
   width: 49%;
+}
+
+.switcherBtn {
+  border: 1px solid #ccc;
+  background-color: inherit;
+  width: 50%;
 }

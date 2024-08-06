@@ -3,32 +3,23 @@ import 'rsuite/dist/rsuite.min.css';
 import styles from './styles.module.scss';
 import {FirstParamBlock} from "./components/firstParamBlock/FirstParamBlock.jsx";
 import {useDispatch, useSelector} from "react-redux";
-import {selectAddNewParam} from "./store/mainSelectors.js";
 import {SecondParamBlock} from "./components/secondParamBlock/SecondParamBlock.jsx";
 import {ExternalFactors} from "./components/externalFactors/ExternalFactors.jsx";
 import {Header} from "./components/header/Header.jsx";
 import {useEffect} from "react";
 import {fetchGetFirstParams} from "./store/firstParamsSlice/firstParam.actions.js";
-import {selectIsFirstParamDone} from "./store/firstParamsSlice/firstParam.selectors.js";
 import {FilterDrawer} from "./components/drawers/filterDrawer/FilterDrower.jsx";
+import {Button} from "rsuite";
+import {selectSwitchBtn} from "./store/mainSelectors.js";
+import {setSwitchBtn} from "./store/mainSlice.js";
 
 export const App = () => {
-  const isAddNewParam = useSelector(selectAddNewParam);
-  const isFirstParamDone = useSelector(selectIsFirstParamDone);
   const dispatch = useDispatch();
+  const btnStatus = useSelector(selectSwitchBtn);
 
   useEffect(() => {
     dispatch(fetchGetFirstParams())
   }, [dispatch]);
-
-  const data = [
-    'Eugenia',
-    'Bryan',
-    'Linda',
-    'Nancy',
-    'Lloyd',
-    'Alice',
-  ].map(item => ({label: item, value: item}));
 
   return (
     <div className={styles.container}>
@@ -45,15 +36,17 @@ export const App = () => {
             </div>
           </div>
           <div className={styles.concatBlocksTitle}>
-            <span style={{fontSize: 'x-large'}}>Выбор параметров в Лонгитюдном круге</span>
+            <Button
+              className={styles.switcherBtn}
+              onClick={() => dispatch(setSwitchBtn(!btnStatus))}
+            >
+              {btnStatus ? 'Выбор параметров через фильтры' : 'Выбор параметров в Лонгитюдном круге'}
+            </Button>
           </div>
           <div className={styles.concatBot}>
             <ExternalFactors/>
           </div>
         </div>
-        {/*<div className={styles.block3}>*/}
-        {/*  <Block3Component/>*/}
-        {/*</div>*/}
       </div>
       <FilterDrawer/>
     </div>

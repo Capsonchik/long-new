@@ -8,6 +8,7 @@ const initialState = {
   currentGraph: 'bar',
   secondParam: false,
   filterDrawerStatus: false,
+  switchBtn: false,
 }
 
 export const counterSlice = createSlice({
@@ -34,6 +35,9 @@ export const counterSlice = createSlice({
     },
     setFilterDrawerStatus: (state, action) => {
       state.filterDrawerStatus = action.payload
+    },
+    setSwitchBtn: (state, action) => {
+      state.switchBtn = action.payload
     }
   },
 })
@@ -46,7 +50,8 @@ export const {
   setSocio,
   setCurrentGraph,
   setSecondParams,
-  setFilterDrawerStatus
+  setFilterDrawerStatus,
+  setSwitchBtn
 } = counterSlice.actions
 
 export default counterSlice.reducer
