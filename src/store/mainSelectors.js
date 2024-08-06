@@ -4,3 +4,4 @@ export const selectSocio = (state) => state.main.socio;
 export const selectCulture = (state) => state.main.culture;
 export const selectSecondParam = (state) => state.main.secondParam;
 export const selectCurrentGraph = (state) => state.main.currentGraph;
+export const selectFilterDrawerStatus = (state) => state.main.filterDrawerStatus;

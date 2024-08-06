@@ -10,7 +10,7 @@ import {Header} from "./components/header/Header.jsx";
 import {useEffect} from "react";
 import {fetchGetFirstParams} from "./store/firstParamsSlice/firstParam.actions.js";
 import {selectIsFirstParamDone} from "./store/firstParamsSlice/firstParam.selectors.js";
-import {Block3Component} from "./components/block3/Block3Component.jsx";
+import {FilterDrawer} from "./components/drawers/filterDrawer/FilterDrower.jsx";
 
 export const App = () => {
   const isAddNewParam = useSelector(selectAddNewParam);
@@ -51,10 +51,11 @@ export const App = () => {
             <ExternalFactors/>
           </div>
         </div>
-        <div className={styles.block3}>
-          <Block3Component/>
-        </div>
+        {/*<div className={styles.block3}>*/}
+        {/*  <Block3Component/>*/}
+        {/*</div>*/}
       </div>
+      <FilterDrawer/>
     </div>
   )
 }

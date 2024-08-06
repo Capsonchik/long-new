@@ -1,12 +1,14 @@
 import styles from './styles.module.scss';
 import {Button} from "rsuite";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {selectCulture, selectLong, selectSocio} from "../../store/mainSelectors.js";
 import {useNavigate} from "react-router-dom";
 import {selectDataLoader} from "../../store/firstParamsSlice/firstParam.selectors.js";
 import {selectIsSecondParamDone} from "../../store/secondParamSlice/secondParamSelectors.js";
+import {setFilterDrawerStatus} from "../../store/mainSlice.js";
 
 export const ExternalFactors = () => {
+  const dispatch = useDispatch();
   const long = useSelector(selectLong);
   const socio = useSelector(selectSocio);
   const culture = useSelector(selectCulture);
@@ -33,8 +35,8 @@ export const ExternalFactors = () => {
                   className={styles.btn}>Корреляция</Button>
           <Button onClick={handleNavigate} disabled={culture} color="orange" appearance="primary"
                   className={styles.btn}>Ф-тест Фишера</Button>
-          <Button onClick={handleNavigate} disabled={culture} color="orange" appearance="primary"
-                  className={styles.btn}>------</Button>
+          <Button onClick={() => dispatch(setFilterDrawerStatus(true))} color="orange" appearance="primary"
+                  className={styles.btn}>Панель фильтров</Button>
         </div>
       </div>
     </div>
