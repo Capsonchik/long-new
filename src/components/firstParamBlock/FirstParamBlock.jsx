@@ -118,7 +118,6 @@ export const FirstParamBlock = () => {
         className={styles.picker}
         data={sourceData}
         placeholder={'Источник'}
-        onChange={handleSegmentSave}
       />
       <SelectPicker
         className={styles.picker}
