@@ -1,8 +1,7 @@
 import './App.css'
 import 'rsuite/dist/rsuite.min.css';
 import styles from './styles.module.scss';
-import {PieChart} from "./components/pieChart/PieChart.jsx";
-import {Button, CheckPicker} from "rsuite";
+import {Button} from "rsuite";
 import {FirstParamBlock} from "./components/firstParamBlock/FirstParamBlock.jsx";
 import {Period} from "./components/block3/period/Period.jsx";
 import {Space} from "./components/block3/space/Space.jsx";
@@ -44,19 +43,20 @@ export const App = () => {
               <FirstParamBlock/>
             </div>
             <div className={styles.block2}>
-              {isFirstParamDone
-                ? <SecondParamBlock/>
-                : (
-                  <>
-                    <div>
-                      <PieChart/>
-                    </div>
-                    <div className={styles.blockPicker}>
-                      <CheckPicker data={data} style={{width: 224}} placeholder={'Выберите дату'}/>
-                    </div>
-                  </>
-                )
-              }
+              {/*{isFirstParamDone*/}
+              {/*  ? <SecondParamBlock/>*/}
+              {/*  : (*/}
+              {/*    <>*/}
+              {/*      <div>*/}
+              {/*        <PieChart/>*/}
+              {/*      </div>*/}
+              {/*      <div className={styles.blockPicker}>*/}
+              {/*        <CheckPicker data={data} style={{width: 224}} placeholder={'Выберите дату'}/>*/}
+              {/*      </div>*/}
+              {/*    </>*/}
+              {/*  )*/}
+              {/*}*/}
+              <SecondParamBlock/>
             </div>
           </div>
           <div className={styles.concatBot}>

@@ -2,7 +2,6 @@ import styles from './styles.module.scss'
 import {SelectPicker} from "rsuite";
 import {useDispatch, useSelector} from "react-redux";
 import {setLong} from "../../store/mainSlice.js";
-import {selectAddNewParam} from "../../store/mainSelectors.js";
 import {
   setAnswerTitle,
   setBlockId,
@@ -44,6 +43,13 @@ export const FirstParamBlock = () => {
   const forthParam = useSelector(selectForthParam);
   const fifthParam = useSelector(selectFifthParam);
 
+  const source = ['Наши данные', 'Лонгитюдные данные']
+
+  const sourceData = source.map(item => ({
+    label: item,
+    value: {id: item, name: item, slave: item},
+  }))
+
   const firstParamData = firstParam && firstParam.map(item => ({
     label: item.category_name,
     value: {id: item.category_id, name: item.category_name, slave: item.slave_block_name},
@@ -68,15 +74,6 @@ export const FirstParamBlock = () => {
     label: item.category_name,
     value: {id: item.category_id, name: item.category_name, slave: item.slave_block_name},
   }))
-
-  const isAddNewParam = useSelector(selectAddNewParam);
-
-
-  // const handleSetNewParam = () => {
-  //   dispatch(addNewParamOption(!isAddNewParam))
-  //   dispatch(fetchGetNextFirstParams())
-  // }
-
 
   const handleSegmentSave = (value) => {
     dispatch(setFirstBlockParamBlockId(value.slave))
@@ -112,17 +109,17 @@ export const FirstParamBlock = () => {
     dispatch(fetchGetAnswers(value.id))
     dispatch(setAnswerTitle(value.name))
     dispatch(setBlockId(value.id))
-
-    // dispatch(addNewParamOption(!isAddNewParam))
-
   }
 
   return (
     <div className={styles.container}>
       <span>Выбор параметра 1</span>
-      {/*<Button color={'orange'} appearance={"primary"} onClick={handleSetNewParam} className={styles.btn}>*/}
-      {/*  {!isAddNewParam ? 'Открыть дополнительный параметр' : 'Скрыть параметр'}*/}
-      {/*</Button>*/}
+      <SelectPicker
+        className={styles.picker}
+        data={sourceData}
+        placeholder={'Источник'}
+        onChange={handleSegmentSave}
+      />
       <SelectPicker
         className={styles.picker}
         data={firstParamData}

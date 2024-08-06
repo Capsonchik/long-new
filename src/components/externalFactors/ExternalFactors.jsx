@@ -33,16 +33,16 @@ export const ExternalFactors = () => {
                   className={styles.btn}>Ф-тест</Button>
         </div>
       </div>
-      <div className={styles.factors}>
-        <span>Внешние факторы</span>
-        <div className={styles.factorsContent}>
-          <Button disabled className={styles.btn}>test</Button>
-          <Button disabled className={styles.btn}>test</Button>
-          <Button disabled className={styles.btn}>test</Button>
-          <Button disabled className={styles.btn}>test</Button>
-          <Button disabled className={styles.btn}>test</Button>
-        </div>
-      </div>
+      {/*<div className={styles.factors}>*/}
+      {/*  <span>Внешние факторы</span>*/}
+      {/*  <div className={styles.factorsContent}>*/}
+      {/*    <Button disabled className={styles.btn}>test</Button>*/}
+      {/*    <Button disabled className={styles.btn}>test</Button>*/}
+      {/*    <Button disabled className={styles.btn}>test</Button>*/}
+      {/*    <Button disabled className={styles.btn}>test</Button>*/}
+      {/*    <Button disabled className={styles.btn}>test</Button>*/}
+      {/*  </div>*/}
+      {/*</div>*/}
     </div>
   );
 };
