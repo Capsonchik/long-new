@@ -43,14 +43,15 @@ export const Sunbirst = () => {
   };
 
   const option = {
-    visualMap: {
-      type: 'continuous',
-      min: 0,
-      max: 10,
-      inRange: {
-        color: ['#2F93C8', '#AEC48F', '#FFDB5C', '#F98862']
-      }
-    },
+    // отключает полоску с левой стороны
+    // visualMap: {
+    //   type: 'continuous',
+    //   min: 0,
+    //   max: 10,
+    //   inRange: {
+    //     color: ['#2F93C8', '#AEC48F', '#FFDB5C', '#F98862']
+    //   }
+    // },
     series: {
       type: 'sunburst',
       data: data,
