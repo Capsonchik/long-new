@@ -13,6 +13,7 @@ import {Button} from "rsuite";
 import {selectSwitchBtn} from "./store/mainSelectors.js";
 import {setSwitchBtn} from "./store/mainSlice.js";
 import {SunGraphs} from "./components/block3/graphs/SunGraphs.jsx";
+import {fetchGetDefaultSunBurst} from "./store/sunBirstSlice/sunBurst.actions.js";
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ export const App = () => {
 
   useEffect(() => {
     dispatch(fetchGetFirstParams())
+    dispatch(fetchGetDefaultSunBurst())
   }, [dispatch]);
 
   return (

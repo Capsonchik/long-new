@@ -1,11 +1,27 @@
 import ReactECharts from "echarts-for-react";
 import {useState} from "react";
+import {useSelector} from "react-redux";
+import {selectSunBurstData} from "../../store/sunBirstSlice/sunBurst.selectors.js";
 
-export const Sunbirst = () => {
+export const Sunburst = () => {
+  const sunBurstData = useSelector(selectSunBurstData);
+
   const initialData = [
     {
       name: 'Биология',
       value: 10,
+      children: [
+        {
+          name: 'CJwb',
+          value: 5,
+          children: [
+            {
+              name: 'dfsdfsf',
+              value: 10,
+            }
+          ]
+        }
+      ]
     },
     {
       name: 'Социология',
@@ -54,7 +70,7 @@ export const Sunbirst = () => {
     // },
     series: {
       type: 'sunburst',
-      data: data,
+      data: sunBurstData && sunBurstData,
       radius: [0, '90%'],
       label: {
         rotate: 'radial'
@@ -71,6 +87,8 @@ export const Sunbirst = () => {
     if (params.data.name === 'Биология') {
       addChild('Биология');
       // alert('Child added to Биология');
+    } else if (params.data.name === 'Социология') {
+      addChild('Социология');
     }
     console.log(params.data);
   };

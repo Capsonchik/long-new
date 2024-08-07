@@ -1,0 +1,1 @@
+export const selectSunBurstData = (state) => state.sunBurst.sunBurstData
