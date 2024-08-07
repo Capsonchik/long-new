@@ -12,6 +12,7 @@ import {FilterDrawer} from "./components/drawers/filterDrawer/FilterDrower.jsx";
 import {Button} from "rsuite";
 import {selectSwitchBtn} from "./store/mainSelectors.js";
 import {setSwitchBtn} from "./store/mainSlice.js";
+import {SunGraphs} from "./components/block3/graphs/SunGraphs.jsx";
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -27,14 +28,17 @@ export const App = () => {
       <div className={styles.topBlocks}>
 
         <div className={styles.concatBlocks}>
-          <div className={styles.concatTop}>
-            <div className={styles.block1}>
-              <FirstParamBlock/>
+          {btnStatus ? <SunGraphs/> : (
+            <div className={styles.concatTop}>
+              <div className={styles.block1}>
+                <FirstParamBlock/>
+              </div>
+              <div className={styles.block2}>
+                <SecondParamBlock/>
+              </div>
             </div>
-            <div className={styles.block2}>
-              <SecondParamBlock/>
-            </div>
-          </div>
+          )}
+
           <div className={styles.concatBlocksTitle}>
             <Button
               className={styles.switcherBtn}

@@ -82,7 +82,7 @@ export const Sunbirst = () => {
     <div>
       <ReactECharts
         key={key}
-        style={{height: 600}}
+        style={{height: 400, width: 400}}
         option={option}
         onEvents={onEvents}
       />
