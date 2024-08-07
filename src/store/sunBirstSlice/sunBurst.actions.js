@@ -16,3 +16,19 @@ export const fetchGetDefaultSunBurst = createAsyncThunk(
     }
   }
 );
+
+export const fetchGetNextSunBurst = createAsyncThunk(
+  'nextSunBurst',
+  async (element) => {
+    try {
+      const response = await axiosMainRequest.get(`visualizations/sunburst_tree/?element_name=${element}`);
+      if (response.status === 200) {
+        return response.data;
+      } else {
+        return 'error';
+      }
+    } catch (error) {
+      return 'throwError(error)';
+    }
+  }
+);

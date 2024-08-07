@@ -30,7 +30,7 @@ export const App = () => {
       <div className={styles.topBlocks}>
 
         <div className={styles.concatBlocks}>
-          {btnStatus ? <SunGraphs/> : (
+          {!btnStatus ? <SunGraphs/> : (
             <div className={styles.concatTop}>
               <div className={styles.block1}>
                 <FirstParamBlock/>

@@ -5,7 +5,8 @@ export const SunGraphs = () => {
   return (
     <div className={styles.container}>
       <Sunburst/>
-      <Sunburst/>
+      {/*<Sunburst/>*/}
+      {/*<SunBurstNext/>*/}
     </div>
   );
 };

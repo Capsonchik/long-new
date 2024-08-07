@@ -1,10 +1,11 @@
-import ReactECharts from "echarts-for-react";
 import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {selectSunBurstData} from "../../store/sunBirstSlice/sunBurst.selectors.js";
 import {fetchGetDefaultSunBurst, fetchGetNextSunBurst} from "../../store/sunBirstSlice/sunBurst.actions.js";
+import ReactECharts from "echarts-for-react";
+import {SUN_DATA_MINI} from "../../mocks/sunData.js";
 
-export const Sunburst = () => {
+export const SunBurstNext = () => {
   const [currentValue, setCurrentValue] = useState('')
   const sunBurstData = useSelector(selectSunBurstData);
   const dispatch = useDispatch();
@@ -83,7 +84,7 @@ export const Sunburst = () => {
     // },
     series: {
       type: 'sunburst',
-      data: sunBurstData && sunBurstData,
+      data: SUN_DATA_MINI,
       radius: [0, '90%'],
       label: {
         rotate: 'radial'
@@ -97,19 +98,18 @@ export const Sunburst = () => {
   };
 
   const onChartClick = (params) => {
-    // if (params.data.name === 'Биология') {
-    //   addChild('Биология');
-    //   // alert('Child added to Биология');
-    // } else if (params.data.name === 'Социология') {
-    //   addChild('Социология');
-    // }
+    if (params.data.name === 'Биология') {
+      addChild('Биология');
+      // alert('Child added to Биология');
+    } else if (params.data.name === 'Социология') {
+      addChild('Социология');
+    }
     setCurrentValue(params.data.name)
   };
 
   const onEvents = {
     click: onChartClick
   };
-
   return (
     <div>
       <ReactECharts

@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {fetchGetDefaultSunBurst} from "./sunBurst.actions.js";
+import {fetchGetDefaultSunBurst, fetchGetNextSunBurst} from "./sunBurst.actions.js";
 
 const initialState = {
   sunBurstData: [],
@@ -16,6 +16,9 @@ export const sunBurstSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(fetchGetDefaultSunBurst.fulfilled, (state, action) => {
+        state.sunBurstData = action.payload;
+      })
+      .addCase(fetchGetNextSunBurst.fulfilled, (state, action) => {
         state.sunBurstData = action.payload;
       })
   }
