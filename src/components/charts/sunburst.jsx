@@ -31,7 +31,7 @@ export const Sunburst = () => {
     if (currentValue) {
       dispatch(fetchGetNextSunBurst(currentValue))
     }
-  }, [currentValue]);
+  }, [currentValue, dispatch]);
 
   const onChartClick = (params) => {
     setCurrentValue(params.data.name)
