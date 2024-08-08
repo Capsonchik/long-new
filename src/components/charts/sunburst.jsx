@@ -1,92 +1,69 @@
 import ReactECharts from "echarts-for-react";
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {selectSunBurstData} from "../../store/sunBirstSlice/sunBurst.selectors.js";
-import {fetchGetDefaultSunBurst, fetchGetNextSunBurst} from "../../store/sunBirstSlice/sunBurst.actions.js";
+import {selectGraphKey, selectSunBurstData} from "../../store/sunBirstSlice/sunBurst.selectors.js";
+import {fetchGetNextSunBurst, fetchGetSunBurstBack} from "../../store/sunBirstSlice/sunBurst.actions.js";
+import {Button} from "rsuite";
 
 export const Sunburst = () => {
-  const [currentValue, setCurrentValue] = useState('')
+  const [currentValue, setCurrentValue] = useState(null)
   const sunBurstData = useSelector(selectSunBurstData);
+  const key = useSelector(selectGraphKey);
   const dispatch = useDispatch();
+  const [currentData, setCurrentData] = useState([])
+  const chartRef = useRef(null)
+
+  const handleBack = () => {
+    dispatch(fetchGetSunBurstBack(currentValue))
+  }
+
+
+  useEffect(() => {
+    setCurrentData(sunBurstData);
+    if (chartRef.current) {
+      chartRef.current.getEchartsInstance().setOption({
+        series: [{data: sunBurstData}]
+      });
+    }
+  }, [sunBurstData]);
 
   useEffect(() => {
     if (currentValue) {
       dispatch(fetchGetNextSunBurst(currentValue))
-      setKey(key + 1);
-      console.log('dspjd')
-    } else {
-      dispatch(fetchGetDefaultSunBurst())
     }
   }, [currentValue]);
 
-  const initialData = [
-    {
-      name: 'Биология',
-      value: 10,
-      children: [
-        {
-          name: 'CJwb',
-          value: 5,
-          children: [
-            {
-              name: 'dfsdfsf',
-              value: 10,
-            }
-          ]
-        }
-      ]
-    },
-    {
-      name: 'Социология',
-      value: 10,
-    },
-    {
-      name: 'Психология',
-      value: 10
-    },
-  ];
+  const onChartClick = (params) => {
+    setCurrentValue(params.data.name)
+  };
 
-  const [data, setData] = useState(initialData);
-  const [key, setKey] = useState(0)
-
-  const addChild = (name) => {
-    const updateData = (items) => {
-      return items.map((item) => {
-        if (item.name === name) {
-          if (!item.children) {
-            item.children = [];
-          }
-          item.children.push({
-            name: `New Child ${item.children.length + 1}`,
-            value: Math.floor(Math.random() * 10) + 1
-          });
-        } else if (item.children) {
-          item.children = updateData(item.children);
-        }
-        return item;
-      });
-    };
-
-    setData(updateData(data));
-    // setKey(key + 1);
+  const onEvents = {
+    click: onChartClick
   };
 
   const option = {
-    // отключает полоску с левой стороны
-    // visualMap: {
-    //   type: 'continuous',
-    //   min: 0,
-    //   max: 10,
-    //   inRange: {
-    //     color: ['#2F93C8', '#AEC48F', '#FFDB5C', '#F98862']
-    //   }
-    // },
+    tooltip: {
+      trigger: 'item',
+      formatter: function (params) {
+        return params.name;
+      }
+    },
     series: {
       type: 'sunburst',
-      data: sunBurstData && sunBurstData,
+      data: currentData,
       radius: [0, '90%'],
       label: {
-        rotate: 'radial'
+        rotate: 'radial',
+        overflow: 'truncate',
+        ellipsis: '...',
+        formatter: function (params) {
+          const maxLabelLength = 10;
+          const label = params.name;
+          if (label.length > maxLabelLength) {
+            return label.substring(0, maxLabelLength) + '...';
+          }
+          return label;
+        }
       },
       itemStyle: {
         borderRadius: 10,
@@ -96,23 +73,11 @@ export const Sunburst = () => {
     }
   };
 
-  const onChartClick = (params) => {
-    // if (params.data.name === 'Биология') {
-    //   addChild('Биология');
-    //   // alert('Child added to Биология');
-    // } else if (params.data.name === 'Социология') {
-    //   addChild('Социология');
-    // }
-    setCurrentValue(params.data.name)
-  };
-
-  const onEvents = {
-    click: onChartClick
-  };
-
   return (
-    <div>
+    <div style={{position: 'relative'}}>
+      <Button style={{position: 'absolute', zIndex: 999}} onClick={handleBack}>Назад</Button>
       <ReactECharts
+        ref={chartRef}
         key={key}
         style={{height: 400, width: 400}}
         option={option}
