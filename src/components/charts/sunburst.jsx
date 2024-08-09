@@ -20,16 +20,13 @@ export const Sunburst = () => {
 
   const handleBack = () => {
     if (backData) {
-      console.log("back true", backData);
       dispatch(fetchGetSunBurstBack(backData))
       dispatch(fetchGetBackData(backData))
     } else {
-      console.log("back false", backData);
       dispatch(fetchGetSunBurstBack(currentValue))
       dispatch(fetchGetBackData(currentValue))
     }
   }
-
 
   useEffect(() => {
     setCurrentData(sunBurstData);
@@ -42,12 +39,17 @@ export const Sunburst = () => {
 
   useEffect(() => {
     if (currentValue) {
+      console.log(currentValue);
       dispatch(fetchGetNextSunBurst(currentValue))
     }
   }, [currentValue, dispatch]);
 
   const onChartClick = (params) => {
     setCurrentValue(params.data.name)
+    if (backData === '') {
+      dispatch(fetchGetBackData(params.data.name))
+    }
+
   };
 
   const onEvents = {
@@ -88,7 +90,13 @@ export const Sunburst = () => {
 
   return (
     <div style={{position: 'relative'}}>
-      <Button style={{position: 'absolute', zIndex: 999}} onClick={handleBack}>Назад</Button>
+      <Button
+        style={{position: 'absolute', zIndex: 999}}
+        onClick={handleBack}
+        disabled={backData === ''}
+      >
+        Назад
+      </Button>
       <ReactECharts
         ref={chartRef}
         key={key}
