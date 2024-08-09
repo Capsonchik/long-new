@@ -1,20 +1,33 @@
 import ReactECharts from "echarts-for-react";
 import {useEffect, useRef, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {selectGraphKey, selectSunBurstData} from "../../store/sunBirstSlice/sunBurst.selectors.js";
-import {fetchGetNextSunBurst, fetchGetSunBurstBack} from "../../store/sunBirstSlice/sunBurst.actions.js";
+import {selectBackData, selectGraphKey, selectSunBurstData} from "../../store/sunBirstSlice/sunBurst.selectors.js";
+import {
+  fetchGetBackData,
+  fetchGetNextSunBurst,
+  fetchGetSunBurstBack
+} from "../../store/sunBirstSlice/sunBurst.actions.js";
 import {Button} from "rsuite";
 
 export const Sunburst = () => {
   const [currentValue, setCurrentValue] = useState(null)
   const sunBurstData = useSelector(selectSunBurstData);
   const key = useSelector(selectGraphKey);
+  const backData = useSelector(selectBackData);
   const dispatch = useDispatch();
   const [currentData, setCurrentData] = useState([])
   const chartRef = useRef(null)
 
   const handleBack = () => {
-    dispatch(fetchGetSunBurstBack(currentValue))
+    if (backData) {
+      console.log("back true", backData);
+      dispatch(fetchGetSunBurstBack(backData))
+      dispatch(fetchGetBackData(backData))
+    } else {
+      console.log("back false", backData);
+      dispatch(fetchGetSunBurstBack(currentValue))
+      dispatch(fetchGetBackData(currentValue))
+    }
   }
 
 

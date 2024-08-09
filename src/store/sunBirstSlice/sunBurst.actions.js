@@ -48,3 +48,21 @@ export const fetchGetSunBurstBack = createAsyncThunk(
     }
   }
 );
+
+export const fetchGetBackData = createAsyncThunk(
+  'backBackData',
+  async (element) => {
+    try {
+      const response = await axiosMainRequest.get(`navigator/sunburst_tree_get_parent/?element_name=${element}`);
+      if (response.status === 200) {
+        return response.data;
+      } else {
+        return 'error';
+      }
+    } catch (error) {
+      return 'throwError(error)';
+    }
+  }
+);
+
+

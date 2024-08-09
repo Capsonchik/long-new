@@ -1,9 +1,15 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {fetchGetDefaultSunBurst, fetchGetNextSunBurst, fetchGetSunBurstBack} from "./sunBurst.actions.js";
+import {
+  fetchGetBackData,
+  fetchGetDefaultSunBurst,
+  fetchGetNextSunBurst,
+  fetchGetSunBurstBack
+} from "./sunBurst.actions.js";
 
 const initialState = {
   sunBurstData: [],
-  key: 0
+  key: 0,
+  backData: ''
 }
 
 export const sunBurstSlice = createSlice({
@@ -33,6 +39,9 @@ export const sunBurstSlice = createSlice({
       .addCase(fetchGetSunBurstBack.fulfilled, (state, action) => {
         state.sunBurstData = action.payload;
         state.key = state.key + 1;
+      })
+      .addCase(fetchGetBackData.fulfilled, (state, action) => {
+        state.backData = action.payload;
       })
   }
 })
