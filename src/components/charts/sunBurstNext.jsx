@@ -1,7 +1,25 @@
 import ReactECharts from "echarts-for-react";
+import {Button} from "rsuite";
+import {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {fetchGetSecondSunBurst} from "../../store/sunBirstSlice/sunBurst.actions.js";
+import {selectNextSunBurstData, selectNextSunBurstKey} from "../../store/sunBirstSlice/sunBurst.selectors.js";
 
 export const SunBurstNext = () => {
+  const dispatch = useDispatch();
+  const [currentValue, setCurrentValue] = useState('');
+  const secondSunBurst = useSelector(selectNextSunBurstData);
+  const key = useSelector(selectNextSunBurstKey);
+
+  useEffect(() => {
+    if (currentValue) {
+      dispatch(fetchGetSecondSunBurst(currentValue))
+    }
+  }, [currentValue, dispatch]);
+
+
   const onChartClick = (params) => {
+    setCurrentValue(params.data.name)
     console.log(params.data.name)
   };
 
@@ -9,20 +27,9 @@ export const SunBurstNext = () => {
     click: onChartClick
   };
 
-  const initialData = [
-    {
-      name: 'Биология',
-      value: 10,
-    },
-    {
-      name: 'Социология',
-      value: 10,
-    },
-    {
-      name: 'Психология',
-      value: 10
-    },
-  ];
+  const handleBack = () => {
+
+  }
 
   const option = {
     tooltip: {
@@ -33,7 +40,7 @@ export const SunBurstNext = () => {
     },
     series: {
       type: 'sunburst',
-      data: initialData,
+      data: secondSunBurst,
       radius: [0, '90%'],
       label: {
         rotate: 'radial',
@@ -58,8 +65,15 @@ export const SunBurstNext = () => {
 
 
   return (
-    <div>
+    <div style={{position: 'relative'}}>
+      <Button
+        onClick={handleBack}
+        style={{position: 'absolute', zIndex: 999}}
+      >
+        Назад
+      </Button>
       <ReactECharts
+        key={key}
         style={{height: 400, width: 400}}
         option={option}
         onEvents={onEvents}

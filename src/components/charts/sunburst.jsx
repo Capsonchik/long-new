@@ -39,17 +39,15 @@ export const Sunburst = () => {
 
   useEffect(() => {
     if (currentValue) {
-      console.log(currentValue);
       dispatch(fetchGetNextSunBurst(currentValue))
     }
   }, [currentValue, dispatch]);
 
   const onChartClick = (params) => {
     setCurrentValue(params.data.name)
-    if (backData === '') {
+    if (backData === '' || backData === null) {
       dispatch(fetchGetBackData(params.data.name))
     }
-
   };
 
   const onEvents = {
@@ -93,7 +91,7 @@ export const Sunburst = () => {
       <Button
         style={{position: 'absolute', zIndex: 999}}
         onClick={handleBack}
-        disabled={backData === ''}
+        disabled={backData === '' || backData === null}
       >
         Назад
       </Button>

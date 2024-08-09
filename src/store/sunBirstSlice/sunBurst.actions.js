@@ -12,7 +12,7 @@ export const fetchGetDefaultSunBurst = createAsyncThunk(
         return 'error';
       }
     } catch (error) {
-      return 'throwError(error)';
+      return [];
     }
   }
 );
@@ -28,7 +28,7 @@ export const fetchGetNextSunBurst = createAsyncThunk(
         return 'error';
       }
     } catch (error) {
-      return 'throwError(error)';
+      return [];
     }
   }
 );
@@ -65,4 +65,36 @@ export const fetchGetBackData = createAsyncThunk(
   }
 );
 
+export const fetchGetNextDefaultSunBurst = createAsyncThunk(
+  'defaultNextSunBurst',
+  async () => {
+    try {
+      const response = await axiosMainRequest.get(`visualizations/sunburst_tree/`);
+      if (response.status === 200) {
+        return response.data;
+      } else {
+        return 'error';
+      }
+    } catch (error) {
+      return [];
+    }
+  }
+);
+
+
+export const fetchGetSecondSunBurst = createAsyncThunk(
+  'secondSunBurst',
+  async (element) => {
+    try {
+      const response = await axiosMainRequest.get(`visualizations/sunburst_tree/?element_name=${element}`);
+      if (response.status === 200) {
+        return response.data;
+      } else {
+        return 'error';
+      }
+    } catch (error) {
+      return [];
+    }
+  }
+);
 
