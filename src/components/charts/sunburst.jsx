@@ -1,30 +1,47 @@
 import ReactECharts from "echarts-for-react";
 import {useEffect, useRef, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {selectBackData, selectGraphKey, selectSunBurstData} from "../../store/sunBirstSlice/sunBurst.selectors.js";
+import {
+  selectBackData,
+  selectFirstCurrentValue,
+  selectGraphKey,
+  selectSunBurstData
+} from "../../store/sunBirstSlice/sunBurst.selectors.js";
 import {
   fetchGetBackData,
+  fetchGetDefaultSunBurst,
   fetchGetNextSunBurst,
   fetchGetSunBurstBack
 } from "../../store/sunBirstSlice/sunBurst.actions.js";
 import {Button} from "rsuite";
+import {setFirstBackData, setFirstCurrentValue} from "../../store/sunBirstSlice/sunBurst.slice.js";
 
 export const Sunburst = () => {
-  const [currentValue, setCurrentValue] = useState(null)
+  const [currentValue, setCurrentValue] = useState('')
   const sunBurstData = useSelector(selectSunBurstData);
   const key = useSelector(selectGraphKey);
   const backData = useSelector(selectBackData);
+  const value = useSelector(selectFirstCurrentValue);
   const dispatch = useDispatch();
   const [currentData, setCurrentData] = useState([])
   const chartRef = useRef(null)
 
+  // const handleBack = () => {
+  //   if (backData) {
+  //     dispatch(fetchGetSunBurstBack(backData))
+  //     dispatch(fetchGetBackData(backData))
+  //   } else {
+  //     dispatch(fetchGetSunBurstBack(currentValue))
+  //     dispatch(fetchGetBackData(currentValue))
+  //   }
+  // }
+
   const handleBack = () => {
-    if (backData) {
+    if (backData === null) {
+      dispatch(fetchGetDefaultSunBurst())
+    } else {
       dispatch(fetchGetSunBurstBack(backData))
       dispatch(fetchGetBackData(backData))
-    } else {
-      dispatch(fetchGetSunBurstBack(currentValue))
-      dispatch(fetchGetBackData(currentValue))
     }
   }
 
@@ -37,17 +54,29 @@ export const Sunburst = () => {
     }
   }, [sunBurstData]);
 
-  useEffect(() => {
-    if (currentValue) {
-      dispatch(fetchGetNextSunBurst(currentValue))
-    }
-  }, [currentValue, dispatch]);
+  // useEffect(() => {
+  //   if (value) {
+  //     dispatch(fetchGetNextSunBurst(value))
+  //   }
+  // }, [value, dispatch]);
 
   const onChartClick = (params) => {
-    setCurrentValue(params.data.name)
-    if (backData === '' || backData === null) {
-      dispatch(fetchGetBackData(params.data.name))
-    }
+    // setCurrentValue(params.data.name)
+    dispatch(setFirstCurrentValue(params.data.name))
+    dispatch(fetchGetNextSunBurst(params.data.name))
+    dispatch(setFirstBackData(params.data.name))
+    // if (backData === '' || backData === null) {
+    //   // dispatch(fetchGetBackData(params.data.name))
+    //   dispatch(setFirstBackData(params.data.name))
+    // } else {
+    //   dispatch(fetchGetBackData(params.data.name))
+    // }
+    // if (backData === null) {
+    //   // dispatch(fetchGetBackData(params.data.name))
+    //   dispatch(setFirstBackData(params.data.name))
+    // } else {
+    //   dispatch(fetchGetBackData(params.data.name))
+    // }
   };
 
   const onEvents = {
@@ -92,6 +121,7 @@ export const Sunburst = () => {
         style={{position: 'absolute', zIndex: 999}}
         onClick={handleBack}
         disabled={backData === '' || backData === null}
+        // disabled={backData === ''}
       >
         Назад
       </Button>

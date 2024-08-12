@@ -50,7 +50,7 @@ export const fetchGetSunBurstBack = createAsyncThunk(
 );
 
 export const fetchGetBackData = createAsyncThunk(
-  'backBackData',
+  'dataForMoveBack',
   async (element) => {
     try {
       const response = await axiosMainRequest.get(`navigator/sunburst_tree_get_parent/?element_name=${element}`);

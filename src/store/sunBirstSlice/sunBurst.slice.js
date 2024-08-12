@@ -11,7 +11,8 @@ import {
 const initialState = {
   sunBurstData: [],
   key: 0,
-  backData: '',
+  firstCurrentValue: '',
+  backData: null,
   nextSunBurstData: [],
   nextKey: 0,
   nextBackData: ''
@@ -23,7 +24,13 @@ export const sunBurstSlice = createSlice({
   reducers: {
     setSunBirstData: (state, action) => {
       state.sunBurstData = action.payload;
-    }
+    },
+    setFirstCurrentValue: (state, action) => {
+      state.firstCurrentValue = action.payload;
+    },
+    setFirstBackData: (state, action) => {
+      state.backData = action.payload;
+    },
   },
   extraReducers: builder => {
     builder
@@ -67,6 +74,8 @@ export const sunBurstSlice = createSlice({
 
 export const {
   setSunBirstData,
+  setFirstBackData,
+  setFirstCurrentValue
 } = sunBurstSlice.actions
 
 export default sunBurstSlice.reducer
