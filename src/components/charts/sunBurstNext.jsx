@@ -1,30 +1,52 @@
 import ReactECharts from "echarts-for-react";
 import {Button} from "rsuite";
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {fetchGetSecondSunBurst} from "../../store/sunBirstSlice/sunBurst.actions.js";
 import {
+  fetchGetNextBackData,
+  fetchGetNextDefaultSunBurst,
+  fetchGetNextSunBurstBack,
+  fetchGetSecondSunBurst
+} from "../../store/sunBirstSlice/sunBurst.actions.js";
+import {
+  selectNextBackData,
   selectNextSunBurstData,
   selectNextSunBurstKey,
   selectSecondCurrentValue
 } from "../../store/sunBirstSlice/sunBurst.selectors.js";
+import {setNextBackData, setSecondCurrentValue} from "../../store/sunBirstSlice/sunBurst.slice.js";
 
 export const SunBurstNext = () => {
   const dispatch = useDispatch();
   const secondCurrentValue = useSelector(selectSecondCurrentValue);
-  const [currentValue, setCurrentValue] = useState('');
+  // const [currentValue, setCurrentValue] = useState('');
   const secondSunBurst = useSelector(selectNextSunBurstData);
+  const backData = useSelector(selectNextBackData);
   const key = useSelector(selectNextSunBurstKey);
+  const chartRef = useRef(null)
+
+  const [currentData, setCurrentData] = useState([])
 
   useEffect(() => {
-    if (currentValue) {
-      dispatch(fetchGetSecondSunBurst(currentValue))
+    setCurrentData(secondSunBurst);
+    if (chartRef.current) {
+      chartRef.current.getEchartsInstance().setOption({
+        series: [{data: secondSunBurst}]
+      });
     }
-  }, [currentValue, dispatch]);
+  }, [secondSunBurst]);
 
+  useEffect(() => {
+    if (secondCurrentValue) {
+      dispatch(fetchGetSecondSunBurst(secondCurrentValue))
+    }
+  }, [secondCurrentValue, dispatch]);
 
   const onChartClick = (params) => {
-    setCurrentValue(params.data.name)
+    // setCurrentValue(params.data.name)
+    dispatch(setSecondCurrentValue(params.data.name))
+    dispatch(setNextBackData(params.data.name))
+    dispatch(fetchGetSecondSunBurst(params.data.name));
   };
 
   const onEvents = {
@@ -32,7 +54,12 @@ export const SunBurstNext = () => {
   };
 
   const handleBack = () => {
-
+    if (backData === null) {
+      dispatch(fetchGetNextDefaultSunBurst())
+    } else {
+      dispatch(fetchGetNextSunBurstBack(backData))
+      dispatch(fetchGetNextBackData(backData))
+    }
   }
 
   const option = {
@@ -44,7 +71,7 @@ export const SunBurstNext = () => {
     },
     series: {
       type: 'sunburst',
-      data: secondSunBurst,
+      data: currentData,
       radius: [0, '90%'],
       label: {
         rotate: 'radial',
@@ -77,6 +104,7 @@ export const SunBurstNext = () => {
         Назад
       </Button>
       <ReactECharts
+        ref={chartRef}
         key={key}
         style={{height: 400, width: 400}}
         option={option}
