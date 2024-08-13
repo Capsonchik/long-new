@@ -25,6 +25,7 @@ const initialState = {
   nextParamFifthBlock: [],
   nextParamFifthBlockParamBlockId: '',
   nextParamFifthBlockParamBlockCategoryId: null,
+  nextParamFifthBlockScaleType: '',
   nextParamAnswers: [],
   nextParamAnswerTitle: '',
   nextParamDataLoader: false,
@@ -74,6 +75,9 @@ export const secondParamsSlice = createSlice({
     setNextParamFifthBlockParamBlockCategoryId: (state, action) => {
       state.nextParamFifthBlockParamBlockCategoryId = action.payload
     },
+    setNextParamFifthBlockScaleType: (state, action) => {
+      state.nextParamFifthBlockScaleType = action.payload
+    },
     setIsSecondParamDone: (state, action) => {
       state.isParamDone = action.payload
     },
@@ -121,6 +125,7 @@ export const {
   setNextParamSecondBlockParamBlockId,
   setNextParamThirdBlockParamBlockCategoryId,
   setNextParamFifthBlockParamBlockCategoryId,
+  setNextParamFifthBlockScaleType,
   setIsSecondParamDone,
   setNextAnswerTitle,
   setFormatter

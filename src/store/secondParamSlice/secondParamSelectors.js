@@ -8,3 +8,4 @@ export const selectNextAnswerTitle = (state) => state.secondParam.answerTitle;
 export const selectNextAnswers = (state) => state.secondParam.answers;
 export const selectNextParamGraphData = (state) => state.secondParam.nextParamGraphData;
 export const selectFormatter = (state) => state.formatter;
+export const selectSecondScaleType = (state) => state.secondParam.nextParamFifthBlockScaleType;

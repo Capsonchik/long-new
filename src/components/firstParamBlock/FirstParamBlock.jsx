@@ -4,9 +4,9 @@ import {useDispatch, useSelector} from "react-redux";
 import {setLong} from "../../store/mainSlice.js";
 import {
   setAnswerTitle,
-  setBlockId,
   setFifthBlockParamBlockCategoryId,
   setFifthBlockParamBlockId,
+  setFifthBlockParamScaleType,
   setFirstBlockParamBlockId,
   setFirstBlockParamCategoryId,
   setForthBlockParamBlockCategoryId,
@@ -72,7 +72,7 @@ export const FirstParamBlock = () => {
 
   const fifthParamData = fifthParam && fifthParam.map(item => ({
     label: item.category_name,
-    value: {id: item.category_id, name: item.category_name, slave: item.slave_block_name},
+    value: {id: item.category_id, name: item.category_name, slave: item.slave_block_name, scale: item.scale_type},
   }))
 
   const handleSegmentSave = (value) => {
@@ -101,6 +101,8 @@ export const FirstParamBlock = () => {
 
   const handleBlock5Save = (value) => {
     dispatch(setQuestion1(value.id))
+    console.log(value)
+    // dispatch(setBlockId(value.id))
     dispatch(setIsFirstParamDone(true))
     dispatch(fetchGetNextFirstParams())
     dispatch(setLong(false))
@@ -108,7 +110,7 @@ export const FirstParamBlock = () => {
     dispatch(setFifthBlockParamBlockCategoryId(value.id))
     dispatch(fetchGetAnswers(value.id))
     dispatch(setAnswerTitle(value.name))
-    dispatch(setBlockId(value.id))
+    dispatch(setFifthBlockParamScaleType(value.scale))
   }
 
   return (

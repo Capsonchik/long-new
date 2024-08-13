@@ -9,3 +9,4 @@ export const selectAnswerTitle = (state) => state.firstParam.answerTitle;
 export const selectDataToSend = (state) => state.firstParam.dataToSend;
 export const selectGraphData = (state) => state.firstParam.graphData;
 export const selectIsFirstParamDone = (state) => state.firstParam.isFirstParamDone;
+export const selectFirstScaleType = (state) => state.firstParam.fifthBlockParamScaleType;

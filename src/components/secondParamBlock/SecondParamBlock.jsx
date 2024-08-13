@@ -13,6 +13,7 @@ import {
   setNextAnswerTitle,
   setNextParamFifthBlockParamBlockCategoryId,
   setNextParamFifthBlockParamBlockId,
+  setNextParamFifthBlockScaleType,
   setNextParamFirstBlockParamBlockCategoryId,
   setNextParamFirstBlockParamBlockId,
   setNextParamForthBlockParamBlockId,
@@ -70,7 +71,7 @@ export const SecondParamBlock = () => {
 
   const fifthParamData = fifthParam && fifthParam.map(item => ({
     label: item.category_name,
-    value: {id: item.category_id, name: item.category_name, slave: item.slave_block_name},
+    value: {id: item.category_id, name: item.category_name, slave: item.slave_block_name, scale: item.scale_type},
   }))
 
   const handleSegmentSave = (value) => {
@@ -104,6 +105,7 @@ export const SecondParamBlock = () => {
     dispatch(setQuestion2(value.id))
     dispatch(fetchGetNextAnswers(value.id))
     dispatch(setNextAnswerTitle(value.name))
+    dispatch(setNextParamFifthBlockScaleType(value.scale))
   }
 
   return (
