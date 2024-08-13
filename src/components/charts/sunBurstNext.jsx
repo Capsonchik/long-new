@@ -3,10 +3,15 @@ import {Button} from "rsuite";
 import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchGetSecondSunBurst} from "../../store/sunBirstSlice/sunBurst.actions.js";
-import {selectNextSunBurstData, selectNextSunBurstKey} from "../../store/sunBirstSlice/sunBurst.selectors.js";
+import {
+  selectNextSunBurstData,
+  selectNextSunBurstKey,
+  selectSecondCurrentValue
+} from "../../store/sunBirstSlice/sunBurst.selectors.js";
 
 export const SunBurstNext = () => {
   const dispatch = useDispatch();
+  const secondCurrentValue = useSelector(selectSecondCurrentValue);
   const [currentValue, setCurrentValue] = useState('');
   const secondSunBurst = useSelector(selectNextSunBurstData);
   const key = useSelector(selectNextSunBurstKey);
@@ -20,7 +25,6 @@ export const SunBurstNext = () => {
 
   const onChartClick = (params) => {
     setCurrentValue(params.data.name)
-    console.log(params.data.name)
   };
 
   const onEvents = {
