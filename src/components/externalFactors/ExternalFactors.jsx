@@ -16,6 +16,8 @@ import {setFilterDrawerStatus} from "../../store/mainSlice.js";
 import {selectHiLoader} from "../../store/hiSlice/hi.selectors.js";
 import {useEffect} from "react";
 import {fetchGetHiData} from "../../store/hiSlice/hi.actions.js";
+import {fetchGetCorelationData} from "../../store/corelationSlice/corelation.actions.js";
+import {selectCorelationLoader} from "../../store/corelationSlice/corelation.selectors.js";
 
 export const ExternalFactors = () => {
   const dispatch = useDispatch();
@@ -24,6 +26,7 @@ export const ExternalFactors = () => {
   const firstScaleType = useSelector(selectFirstScaleType);
   const secondScaleType = useSelector(selectSecondScaleType);
   const hiLoader = useSelector(selectHiLoader);
+  const corelationLoader = useSelector(selectCorelationLoader);
   const firstParam = useSelector(selectFifthParamBlockId)
   const secondParam = useSelector(selectNextFifthParamBlockId)
 
@@ -38,8 +41,8 @@ export const ExternalFactors = () => {
       (firstScaleType === 'категориальная' || firstScaleType === 'иерархическая') &&
       (secondScaleType === 'категориальная' || secondScaleType === 'иерархическая')) {
       dispatch(fetchGetHiData({parameter1: firstParam, parameter2: secondParam}))
-      console.log('firstParam', firstParam)
-      console.log('secondParam', secondParam)
+    } else if (firstScaleType === 'метрическая' && secondScaleType === 'метрическая') {
+      dispatch(fetchGetCorelationData({parameter1: firstParam, parameter2: secondParam}))
     }
   }, [dispatch, firstScaleType, secondScaleType]);
 
@@ -70,6 +73,7 @@ export const ExternalFactors = () => {
             color="orange"
             appearance="primary"
             className={styles.btn}
+            loading={corelationLoader}
           >
             Корреляция
           </Button>
