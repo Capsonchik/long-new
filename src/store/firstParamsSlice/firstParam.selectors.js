@@ -3,6 +3,7 @@ export const selectSecondParam = (state) => state.firstParam.secondBlock;
 export const selectThirdBlock = (state) => state.firstParam.thirdBlock;
 export const selectForthParam = (state) => state.firstParam.forthBlock;
 export const selectFifthParam = (state) => state.firstParam.fifthBlock;
+export const selectFifthParamBlockId = (state) => state.firstParam.fifthBlockParamBlockCategoryId;
 export const selectDataLoader = (state) => state.firstParam.dataLoader;
 export const selectAnswers = (state) => state.firstParam.answers;
 export const selectAnswerTitle = (state) => state.firstParam.answerTitle;

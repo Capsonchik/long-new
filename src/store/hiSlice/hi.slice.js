@@ -1,4 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
+import {fetchGetHiData} from "./hi.actions.js";
 
 const initialState = {
   hiData: [],
@@ -12,6 +13,16 @@ const hiSlice = createSlice({
     setHiLoader: (state, action) => {
       state.hiLoader = action.payload;
     }
+  },
+  extraReducers: builder => {
+    builder
+      .addCase(fetchGetHiData.fulfilled, (state, action) => {
+        state.hiData = action.payload
+        state.hiLoader = false
+      })
+      .addCase(fetchGetHiData.pending, (state) => {
+        state.hiLoader = true
+      })
   }
 })
 
