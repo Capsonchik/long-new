@@ -2,9 +2,6 @@ import {createSlice} from '@reduxjs/toolkit'
 
 const initialState = {
   isAddNewParam: false,
-  longitude: true,
-  socio: true,
-  culture: true,
   currentGraph: 'bar',
   secondParam: false,
   filterDrawerStatus: false,
@@ -17,15 +14,6 @@ export const counterSlice = createSlice({
   reducers: {
     addNewParamOption: (state, action) => {
       state.isAddNewParam = action.payload
-    },
-    setLong: (state, action) => {
-      state.longitude = action.payload
-    },
-    setSocio: (state, action) => {
-      state.socio = action.payload
-    },
-    setCulture: (state, action) => {
-      state.culture = action.payload
     },
     setCurrentGraph: (state, action) => {
       state.currentGraph = action.payload
@@ -44,12 +32,7 @@ export const counterSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const {
-  addNewParamOption,
-  setCulture,
   setLong,
-  setSocio,
-  setCurrentGraph,
-  setSecondParams,
   setFilterDrawerStatus,
   setSwitchBtn
 } = counterSlice.actions

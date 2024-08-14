@@ -1,7 +1,6 @@
 import styles from './styles.module.scss';
 import {Button} from "rsuite";
 import {useDispatch, useSelector} from "react-redux";
-import {selectCulture, selectLong, selectSocio} from "../../store/mainSelectors.js";
 import {useNavigate} from "react-router-dom";
 import {selectDataLoader, selectFirstScaleType} from "../../store/firstParamsSlice/firstParam.selectors.js";
 import {selectIsSecondParamDone, selectSecondScaleType} from "../../store/secondParamSlice/secondParamSelectors.js";
@@ -9,9 +8,6 @@ import {setFilterDrawerStatus} from "../../store/mainSlice.js";
 
 export const ExternalFactors = () => {
   const dispatch = useDispatch();
-  const long = useSelector(selectLong);
-  const socio = useSelector(selectSocio);
-  const culture = useSelector(selectCulture);
   const dataLoader = useSelector(selectDataLoader);
   const isSecondParamDone = useSelector(selectIsSecondParamDone);
   const firstScaleType = useSelector(selectFirstScaleType);
@@ -23,13 +19,6 @@ export const ExternalFactors = () => {
   const handleNavigate = () => {
     navigate('/data')
   }
-
-  const isButtonEnabled = (firstScaleType, secondScaleType) => {
-    return (
-      (firstScaleType === 'категориальная' || firstScaleType === 'иерархичная') &&
-      (secondScaleType === 'категориальная' || secondScaleType === 'иерархичная')
-    );
-  };
 
   return (
     <div className={styles.externalContainer}>
