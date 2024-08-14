@@ -1,5 +1,5 @@
 import styles from './styles.module.scss';
-import {Button} from "rsuite";
+import {Button, Panel} from "rsuite";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {
@@ -12,13 +12,14 @@ import {
   selectNextFifthParamBlockId,
   selectSecondScaleType
 } from "../../store/secondParamSlice/secondParamSelectors.js";
-import {setFilterDrawerStatus} from "../../store/mainSlice.js";
+import {setFilterDrawerStatus, setSwitchBtn} from "../../store/mainSlice.js";
 import {selectHiLoader} from "../../store/hiSlice/hi.selectors.js";
 import {useEffect} from "react";
 import {fetchGetHiData} from "../../store/hiSlice/hi.actions.js";
 import {fetchGetCorelationData} from "../../store/corelationSlice/corelation.actions.js";
 import {selectCorelationLoader} from "../../store/corelationSlice/corelation.selectors.js";
 import {fetchGetFtestData} from "../../store/fTestSlice/fTest.actions.js";
+import {selectSwitchBtn} from "../../store/mainSelectors.js";
 
 export const ExternalFactors = () => {
   const dispatch = useDispatch();
@@ -28,8 +29,9 @@ export const ExternalFactors = () => {
   const secondScaleType = useSelector(selectSecondScaleType);
   const hiLoader = useSelector(selectHiLoader);
   const corelationLoader = useSelector(selectCorelationLoader);
-  const firstParam = useSelector(selectFifthParamBlockId)
-  const secondParam = useSelector(selectNextFifthParamBlockId)
+  const firstParam = useSelector(selectFifthParamBlockId);
+  const secondParam = useSelector(selectNextFifthParamBlockId);
+  const btnStatus = useSelector(selectSwitchBtn);
 
   const navigate = useNavigate()
 
@@ -53,52 +55,63 @@ export const ExternalFactors = () => {
   }, [dispatch, firstScaleType, secondScaleType]);
 
   return (
-    <div className={styles.externalContainer}>
-      <div className={styles.factors}>
-        <span>Витрина аналитики</span>
-        <div className={styles.factorsContent}>
-          <Button onClick={handleNavigate} loading={dataLoader} disabled={!isSecondParamDone} color="orange"
-                  appearance="primary"
-                  className={styles.btn}>Данные</Button>
-          <Button
-            onClick={handleNavigate}
-            disabled={!(
-              (firstScaleType === 'категориальная' || firstScaleType === 'иерархическая') &&
-              (secondScaleType === 'категориальная' || secondScaleType === 'иерархическая')
-            )}
-            color="orange"
-            appearance="primary"
-            className={styles.btn}
-            loading={hiLoader}
-          >
-            Хи-квадрат
-          </Button>
-          <Button
-            onClick={handleNavigate}
-            disabled={!(firstScaleType === 'метрическая' && secondScaleType === 'метрическая')}
-            color="orange"
-            appearance="primary"
-            className={styles.btn}
-            loading={corelationLoader}
-          >
-            Корреляция
-          </Button>
-          <Button
-            onClick={handleNavigate}
-            disabled={!(
-              (firstScaleType === 'метрическая' || firstScaleType === 'иерархическая') &&
-              (secondScaleType === 'категориальная' || secondScaleType === 'номинальная')
-            )}
-            color="orange"
-            appearance="primary"
-            className={styles.btn}
-          >
-            Ф-тест Фишера
-          </Button>
-          <Button onClick={() => dispatch(setFilterDrawerStatus(true))} color="orange" appearance="primary"
-                  className={styles.btn}>Панель фильтров</Button>
+    <Panel header="Витрина аналитики" bordered>
+      <div className={styles.externalContainer}>
+        <div className={styles.factors}>
+          {/*<span>Витрина аналитики</span>*/}
+          <div className={styles.factorsContent}>
+            <Button onClick={handleNavigate} loading={dataLoader} disabled={!isSecondParamDone} color="orange"
+                    appearance="primary"
+                    className={styles.btn}>Данные</Button>
+            <Button
+              onClick={handleNavigate}
+              disabled={!(
+                (firstScaleType === 'категориальная' || firstScaleType === 'иерархическая') &&
+                (secondScaleType === 'категориальная' || secondScaleType === 'иерархическая')
+              )}
+              color="orange"
+              appearance="primary"
+              className={styles.btn}
+              loading={hiLoader}
+            >
+              Хи-квадрат
+            </Button>
+            <Button
+              onClick={handleNavigate}
+              disabled={!(firstScaleType === 'метрическая' && secondScaleType === 'метрическая')}
+              color="orange"
+              appearance="primary"
+              className={styles.btn}
+              loading={corelationLoader}
+            >
+              Корреляция
+            </Button>
+            <Button
+              onClick={handleNavigate}
+              disabled={!(
+                (firstScaleType === 'метрическая' || firstScaleType === 'иерархическая') &&
+                (secondScaleType === 'категориальная' || secondScaleType === 'номинальная')
+              )}
+              color="orange"
+              appearance="primary"
+              className={styles.btn}
+            >
+              Ф-тест Фишера
+            </Button>
+            <Button onClick={() => dispatch(setFilterDrawerStatus(true))} color="orange" appearance="primary"
+                    className={styles.btn}>Панель фильтров</Button>
+            <Button
+              className={styles.btn}
+              color="orange"
+              appearance="primary"
+              onClick={() => dispatch(setSwitchBtn(!btnStatus))}
+            >
+              {btnStatus ? 'Фильтры' : 'Круг'}
+            </Button>
+          </div>
         </div>
       </div>
-    </div>
+    </Panel>
+
   );
 };
