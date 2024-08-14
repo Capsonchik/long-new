@@ -18,6 +18,7 @@ import {useEffect} from "react";
 import {fetchGetHiData} from "../../store/hiSlice/hi.actions.js";
 import {fetchGetCorelationData} from "../../store/corelationSlice/corelation.actions.js";
 import {selectCorelationLoader} from "../../store/corelationSlice/corelation.selectors.js";
+import {fetchGetFtestData} from "../../store/fTestSlice/fTest.actions.js";
 
 export const ExternalFactors = () => {
   const dispatch = useDispatch();
@@ -43,6 +44,11 @@ export const ExternalFactors = () => {
       dispatch(fetchGetHiData({parameter1: firstParam, parameter2: secondParam}))
     } else if (firstScaleType === 'метрическая' && secondScaleType === 'метрическая') {
       dispatch(fetchGetCorelationData({parameter1: firstParam, parameter2: secondParam}))
+    } else if (
+      (firstScaleType === 'метрическая' || firstScaleType === 'иерархическая') &&
+      (secondScaleType === 'категориальная' || secondScaleType === 'номинальная')
+    ) {
+      dispatch(fetchGetFtestData({parameter1: firstParam, parameter2: secondParam}))
     }
   }, [dispatch, firstScaleType, secondScaleType]);
 
