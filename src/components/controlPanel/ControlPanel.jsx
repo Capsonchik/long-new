@@ -8,7 +8,6 @@ import {
   setReportDrawer,
   setSpaceAndTimeDrawer
 } from "../../store/drawerSlice/drawer.slice.js";
-import {setSwitchBtn} from "../../store/mainSlice.js";
 import {selectSwitchBtn} from "../../store/mainSelectors.js";
 import {selectIsSecondParamDone} from "../../store/secondParamSlice/secondParamSelectors.js";
 import {selectDataLoader} from "../../store/firstParamsSlice/firstParam.selectors.js";
@@ -64,14 +63,14 @@ export const ControlPanel = () => {
         >
           Отображение отчета
         </Button>
-        <Button
-          className={styles.btn}
-          color="orange"
-          appearance="primary"
-          onClick={() => dispatch(setSwitchBtn(!btnStatus))}
-        >
-          {btnStatus ? 'Фильтры' : 'Круг'}
-        </Button>
+        {/*<Button*/}
+        {/*  className={styles.btn}*/}
+        {/*  color="orange"*/}
+        {/*  appearance="primary"*/}
+        {/*  onClick={() => dispatch(setSwitchBtn(!btnStatus))}*/}
+        {/*>*/}
+        {/*  {btnStatus ? 'Фильтры' : 'Круг'}*/}
+        {/*</Button>*/}
       </div>
 
     </Panel>
