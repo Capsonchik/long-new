@@ -1,0 +1,17 @@
+.topFiltersBlock {
+  display: flex;
+  justify-content: space-between;
+  border-radius: 8px;
+}
+
+.topFiltersBlockContent {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 1rem;
+  width: 49%;
+}
+
+.picker {
+  width: 100%;
+}
