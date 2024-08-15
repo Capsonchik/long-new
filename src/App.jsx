@@ -13,6 +13,12 @@ import {SunGraphs} from "./components/block3/graphs/SunGraphs.jsx";
 import {fetchGetDefaultSunBurst, fetchGetNextDefaultSunBurst} from "./store/sunBirstSlice/sunBurst.actions.js";
 import {ExternalFactors} from "./components/externalFactors/ExternalFactors.jsx";
 import {Panel} from "rsuite";
+import {ControlPanel} from "./components/controlPanel/ControlPanel.jsx";
+import {AnaliticDrawer} from "./components/drawers/analiticDrawer/AnaliticDrawer.jsx";
+import {SpaceDrawer} from "./components/drawers/spaceDrawer/SpaceDrawer.jsx";
+import {InfoDraver} from "./components/drawers/infoDrawer/InfoDraver.jsx";
+import {ExternalDrawer} from "./components/drawers/externalDrawer/externalDrawer.jsx";
+import {ReportDrawer} from "./components/drawers/reportDrawer/reportDrawer.jsx";
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -28,6 +34,7 @@ export const App = () => {
     <div className={styles.container}>
       <Header/>
       <ExternalFactors/>
+      <ControlPanel/>
       <div className={styles.topBlocks}>
         <Panel bordered className={styles.concatBlocks}>
           {/*<div className={styles.concatBlocks}>*/}
@@ -58,6 +65,11 @@ export const App = () => {
 
       </div>
       <FilterDrawer/>
+      <AnaliticDrawer/>
+      <SpaceDrawer/>
+      <InfoDraver/>
+      <ExternalDrawer/>
+      <ReportDrawer/>
     </div>
   )
 }
