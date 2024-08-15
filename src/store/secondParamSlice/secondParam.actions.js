@@ -105,7 +105,7 @@ export const fetchPostNextGraphData = createAsyncThunk(
   'postGraphInfo',
   async (data) => {
     try {
-      const response = await axiosMainRequest.post(`visualizations/crosstabulation_barcharts/`, data);
+      const response = await axiosMainRequest.post(`/visualizations/crosstabulation_barcharts_percentage/`, data);
       if (response.status === 200) {
         return response.data;
       } else {

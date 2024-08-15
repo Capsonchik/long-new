@@ -11,7 +11,7 @@ import {FilterDrawer} from "./components/drawers/filterDrawer/FilterDrower.jsx";
 import {selectSwitchBtn} from "./store/mainSelectors.js";
 import {SunGraphs} from "./components/block3/graphs/SunGraphs.jsx";
 import {fetchGetDefaultSunBurst, fetchGetNextDefaultSunBurst} from "./store/sunBirstSlice/sunBurst.actions.js";
-import {Panel} from "rsuite";
+import {Button, Panel} from "rsuite";
 import {ControlPanel} from "./components/controlPanel/ControlPanel.jsx";
 import {AnaliticDrawer} from "./components/drawers/analiticDrawer/AnaliticDrawer.jsx";
 import {SpaceDrawer} from "./components/drawers/spaceDrawer/SpaceDrawer.jsx";
@@ -34,6 +34,7 @@ export const App = () => {
       <Header/>
       {/*<ExternalFactors/>*/}
       <ControlPanel/>
+
       <div className={styles.topBlocks}>
         <Panel bordered className={styles.concatBlocks}>
           {/*<div className={styles.concatBlocks}>*/}
@@ -62,6 +63,13 @@ export const App = () => {
           {/*</div>*/}
         </Panel>
 
+      </div>
+      <div style={{width: '100%', display: 'flex', justifyContent: 'center'}}>
+        <Button
+          appearance={'primary'}
+          color={'orange'}
+          style={{width: 500}}
+        >test</Button>
       </div>
       <FilterDrawer/>
       <AnaliticDrawer/>
