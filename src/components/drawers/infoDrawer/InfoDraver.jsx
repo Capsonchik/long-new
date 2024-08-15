@@ -1,6 +1,9 @@
 import styles from './styles.module.scss';
 import {setInfoDrawer} from "../../../store/drawerSlice/drawer.slice.js";
-import {Button, Drawer, Panel} from "rsuite";
+import {Button, Drawer, Panel, RadioTile, RadioTileGroup} from "rsuite";
+import {Icon} from '@rsuite/icons';
+import SentToUserIcon from '@rsuite/icons/SentToUser';
+import SpeakerIcon from '@rsuite/icons/Speaker';
 import {useDispatch, useSelector} from "react-redux";
 import {selectInfoDrawer} from "../../../store/drawerSlice/drawer.selectors.js";
 
@@ -30,6 +33,14 @@ export const InfoDraver = () => {
             </Button>
           </div>
         </Panel>
+        <RadioTileGroup defaultValue="private" aria-label="Visibility Level">
+          <RadioTile icon={<Icon as={SentToUserIcon}/>} label="Новости" value="private">
+            Какое то описание для данного выбора
+          </RadioTile>
+          <RadioTile icon={<Icon as={SpeakerIcon}/>} label="События" value="internal">
+            Какое то описание для данного выбора
+          </RadioTile>
+        </RadioTileGroup>
       </Drawer.Body>
     </Drawer>
   );
