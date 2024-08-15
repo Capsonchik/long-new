@@ -1,6 +1,6 @@
 import styles from './styles.module.scss'
 import {Button, Panel} from "rsuite";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {
   setAnaliticDrawer,
   setExternalDrawer,
@@ -8,9 +8,17 @@ import {
   setReportDrawer,
   setSpaceAndTimeDrawer
 } from "../../store/drawerSlice/drawer.slice.js";
+import {setSwitchBtn} from "../../store/mainSlice.js";
+import {selectSwitchBtn} from "../../store/mainSelectors.js";
+import {selectIsSecondParamDone} from "../../store/secondParamSlice/secondParamSelectors.js";
+import {selectDataLoader} from "../../store/firstParamsSlice/firstParam.selectors.js";
 
 export const ControlPanel = () => {
   const dispatch = useDispatch();
+  const btnStatus = useSelector(selectSwitchBtn);
+  const isSecondParamDone = useSelector(selectIsSecondParamDone);
+  const dataLoader = useSelector(selectDataLoader);
+
   return (
     <Panel className={styles.panel} bordered header={'Панель управления'}>
       <div className={styles.content}>
@@ -19,6 +27,8 @@ export const ControlPanel = () => {
           color="orange"
           appearance="primary"
           className={styles.btn}
+          loading={dataLoader}
+          disabled={!isSecondParamDone}
         >
           Аналитика
         </Button>
@@ -53,6 +63,14 @@ export const ControlPanel = () => {
           className={styles.btn}
         >
           Отображение отчета
+        </Button>
+        <Button
+          className={styles.btn}
+          color="orange"
+          appearance="primary"
+          onClick={() => dispatch(setSwitchBtn(!btnStatus))}
+        >
+          {btnStatus ? 'Фильтры' : 'Круг'}
         </Button>
       </div>
 

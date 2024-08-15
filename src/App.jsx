@@ -11,7 +11,6 @@ import {FilterDrawer} from "./components/drawers/filterDrawer/FilterDrower.jsx";
 import {selectSwitchBtn} from "./store/mainSelectors.js";
 import {SunGraphs} from "./components/block3/graphs/SunGraphs.jsx";
 import {fetchGetDefaultSunBurst, fetchGetNextDefaultSunBurst} from "./store/sunBirstSlice/sunBurst.actions.js";
-import {ExternalFactors} from "./components/externalFactors/ExternalFactors.jsx";
 import {Panel} from "rsuite";
 import {ControlPanel} from "./components/controlPanel/ControlPanel.jsx";
 import {AnaliticDrawer} from "./components/drawers/analiticDrawer/AnaliticDrawer.jsx";
@@ -33,7 +32,7 @@ export const App = () => {
   return (
     <div className={styles.container}>
       <Header/>
-      <ExternalFactors/>
+      {/*<ExternalFactors/>*/}
       <ControlPanel/>
       <div className={styles.topBlocks}>
         <Panel bordered className={styles.concatBlocks}>

@@ -12,7 +12,6 @@ import {
   selectNextFifthParamBlockId,
   selectSecondScaleType
 } from "../../store/secondParamSlice/secondParamSelectors.js";
-import {setFilterDrawerStatus, setSwitchBtn} from "../../store/mainSlice.js";
 import {selectHiLoader} from "../../store/hiSlice/hi.selectors.js";
 import {useEffect} from "react";
 import {fetchGetHiData} from "../../store/hiSlice/hi.actions.js";
@@ -55,7 +54,7 @@ export const ExternalFactors = () => {
   }, [dispatch, firstScaleType, secondScaleType]);
 
   return (
-    <Panel header="Витрина аналитики" bordered>
+    <Panel bordered>
       <div className={styles.externalContainer}>
         <div className={styles.factors}>
           {/*<span>Витрина аналитики</span>*/}
@@ -98,16 +97,16 @@ export const ExternalFactors = () => {
             >
               Ф-тест Фишера
             </Button>
-            <Button onClick={() => dispatch(setFilterDrawerStatus(true))} color="orange" appearance="primary"
-                    className={styles.btn}>Панель фильтров</Button>
-            <Button
-              className={styles.btn}
-              color="orange"
-              appearance="primary"
-              onClick={() => dispatch(setSwitchBtn(!btnStatus))}
-            >
-              {btnStatus ? 'Фильтры' : 'Круг'}
-            </Button>
+            {/*<Button onClick={() => dispatch(setFilterDrawerStatus(true))} color="orange" appearance="primary"*/}
+            {/*        className={styles.btn}>Панель фильтров</Button>*/}
+            {/*<Button*/}
+            {/*  className={styles.btn}*/}
+            {/*  color="orange"*/}
+            {/*  appearance="primary"*/}
+            {/*  onClick={() => dispatch(setSwitchBtn(!btnStatus))}*/}
+            {/*>*/}
+            {/*  {btnStatus ? 'Фильтры' : 'Круг'}*/}
+            {/*</Button>*/}
           </div>
         </div>
       </div>
