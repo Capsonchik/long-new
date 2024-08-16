@@ -5,7 +5,7 @@ export const fetchGetFtestData = createAsyncThunk(
   'fTestData',
   async (data) => {
     try {
-      const response = await axiosMainRequest.get(`/v1/analyses/anova_table/`, data);
+      const response = await axiosMainRequest.post(`/analyses/anova_table/`, data);
       if (response.status === 200) {
         return response.data;
       } else {

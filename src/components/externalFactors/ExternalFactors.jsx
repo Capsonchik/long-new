@@ -19,6 +19,7 @@ import {fetchGetCorelationData} from "../../store/corelationSlice/corelation.act
 import {selectCorelationLoader} from "../../store/corelationSlice/corelation.selectors.js";
 import {fetchGetFtestData} from "../../store/fTestSlice/fTest.actions.js";
 import {selectSwitchBtn} from "../../store/mainSelectors.js";
+import {selectFtestLoader} from "../../store/fTestSlice/fTest.selectors.js";
 
 export const ExternalFactors = () => {
   const dispatch = useDispatch();
@@ -28,6 +29,7 @@ export const ExternalFactors = () => {
   const secondScaleType = useSelector(selectSecondScaleType);
   const hiLoader = useSelector(selectHiLoader);
   const corelationLoader = useSelector(selectCorelationLoader);
+  const ftestLoader = useSelector(selectFtestLoader);
   const firstParam = useSelector(selectFifthParamBlockId);
   const secondParam = useSelector(selectNextFifthParamBlockId);
   const btnStatus = useSelector(selectSwitchBtn);
@@ -38,18 +40,27 @@ export const ExternalFactors = () => {
     navigate('/data')
   }
 
+  const hiNavigate = () => {
+    navigate('/hipage')
+  }
+
   useEffect(() => {
     if (
       (firstScaleType === 'категориальная' || firstScaleType === 'иерархическая') &&
-      (secondScaleType === 'категориальная' || secondScaleType === 'иерархическая')) {
-      dispatch(fetchGetHiData({parameter1: firstParam, parameter2: secondParam}))
-    } else if (firstScaleType === 'метрическая' && secondScaleType === 'метрическая') {
-      dispatch(fetchGetCorelationData({parameter1: firstParam, parameter2: secondParam}))
-    } else if (
+      (secondScaleType === 'категориальная' || secondScaleType === 'иерархическая')
+    ) {
+      dispatch(fetchGetHiData({parameter1: firstParam, parameter2: secondParam}));
+    }
+
+    if (firstScaleType === 'метрическая' && secondScaleType === 'метрическая') {
+      dispatch(fetchGetCorelationData({parameter1: firstParam, parameter2: secondParam}));
+    }
+
+    if (
       (firstScaleType === 'метрическая' || firstScaleType === 'иерархическая') &&
       (secondScaleType === 'категориальная' || secondScaleType === 'номинальная')
     ) {
-      dispatch(fetchGetFtestData({parameter1: firstParam, parameter2: secondParam}))
+      dispatch(fetchGetFtestData({parameter1: firstParam, parameter2: secondParam}));
     }
   }, [dispatch, firstScaleType, secondScaleType]);
 
@@ -63,7 +74,7 @@ export const ExternalFactors = () => {
                     appearance="primary"
                     className={styles.btn}>Данные</Button>
             <Button
-              onClick={handleNavigate}
+              onClick={hiNavigate}
               disabled={!(
                 (firstScaleType === 'категориальная' || firstScaleType === 'иерархическая') &&
                 (secondScaleType === 'категориальная' || secondScaleType === 'иерархическая')
@@ -86,7 +97,7 @@ export const ExternalFactors = () => {
               Корреляция
             </Button>
             <Button
-              onClick={handleNavigate}
+              onClick={() => navigate('/ftest')}
               disabled={!(
                 (firstScaleType === 'метрическая' || firstScaleType === 'иерархическая') &&
                 (secondScaleType === 'категориальная' || secondScaleType === 'номинальная')
@@ -94,6 +105,7 @@ export const ExternalFactors = () => {
               color="orange"
               appearance="primary"
               className={styles.btn}
+              loading={ftestLoader}
             >
               Ф-тест Фишера
             </Button>

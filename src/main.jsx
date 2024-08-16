@@ -19,7 +19,7 @@ const router = createBrowserRouter([
     element: <DataPage/>,
   },
   {
-    path: "/hi",
+    path: "/hipage",
     element: <HiPage/>,
   },
   {
