@@ -18,7 +18,6 @@ import {fetchGetHiData} from "../../store/hiSlice/hi.actions.js";
 import {fetchGetCorelationData} from "../../store/corelationSlice/corelation.actions.js";
 import {selectCorelationLoader} from "../../store/corelationSlice/corelation.selectors.js";
 import {fetchGetFtestData} from "../../store/fTestSlice/fTest.actions.js";
-import {selectSwitchBtn} from "../../store/mainSelectors.js";
 import {selectFtestLoader} from "../../store/fTestSlice/fTest.selectors.js";
 
 export const ExternalFactors = () => {
@@ -32,7 +31,6 @@ export const ExternalFactors = () => {
   const ftestLoader = useSelector(selectFtestLoader);
   const firstParam = useSelector(selectFifthParamBlockId);
   const secondParam = useSelector(selectNextFifthParamBlockId);
-  const btnStatus = useSelector(selectSwitchBtn);
 
   const navigate = useNavigate()
 
@@ -87,7 +85,7 @@ export const ExternalFactors = () => {
               Хи-квадрат
             </Button>
             <Button
-              onClick={handleNavigate}
+              onClick={() => navigate('/corelation')}
               disabled={!(firstScaleType === 'метрическая' && secondScaleType === 'метрическая')}
               color="orange"
               appearance="primary"
