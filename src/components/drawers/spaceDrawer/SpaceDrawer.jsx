@@ -3,14 +3,16 @@ import {setSpaceAndTimeDrawer} from "../../../store/drawerSlice/drawer.slice.js"
 import {CheckPicker, Drawer, Panel, SelectPicker} from "rsuite";
 import {useDispatch, useSelector} from "react-redux";
 import {selectSpaceAndTimeDrawer} from "../../../store/drawerSlice/drawer.selectors.js";
-import {DATE_TO_PICK, PERIOD, REGION, SPACE} from "../../../mocks/regionMock.js";
+import {DATE_TO_PICK, PERIOD, SPACE} from "../../../mocks/regionMock.js";
 import {useState} from "react";
 import {dateToPickFormatter} from "../../helpers/dateHelper.js";
+import {regionFormatter} from "../../helpers/regionHelper.js";
 
 export const SpaceDrawer = () => {
   const dispatch = useDispatch();
   const status = useSelector(selectSpaceAndTimeDrawer);
   const [format, setFormat] = useState([])
+  const [currentRegionData, setCurrentRegionData] = useState([])
 
   const dateToPick = DATE_TO_PICK.map(item => ({
     label: item,
@@ -27,7 +29,7 @@ export const SpaceDrawer = () => {
     value: {id: item, name: item, slave: item},
   }))
 
-  const regionData = REGION.map(item => ({
+  const regionData = currentRegionData.map(item => ({
     label: item,
     value: {id: item, name: item, slave: item},
   }))
@@ -46,6 +48,15 @@ export const SpaceDrawer = () => {
     }
   }
 
+  const handleRegionChenge = (value) => {
+    if (value === null) {
+      return spaceData
+    } else {
+      const currentFormat = regionFormatter(value.name)
+      setCurrentRegionData(currentFormat)
+    }
+  }
+
   return (
     <Drawer open={status} onClose={() => dispatch(setSpaceAndTimeDrawer(false))}>
       <Drawer.Body style={{display: 'flex', flexDirection: 'column', gap: '1rem'}}>
@@ -54,14 +65,29 @@ export const SpaceDrawer = () => {
           <div className={styles.topFiltersBlock}>
             <div className={styles.topFiltersBlockContent}>
               <span>Время</span>
-              <SelectPicker className={styles.picker} data={periodData} placeholder={'Период'}
-                            onChange={handlePeriodChange}/>
-              <CheckPicker className={styles.picker} data={formatData} placeholder={'Фильтр'}/>
+              <SelectPicker
+                className={styles.picker}
+                data={periodData}
+                placeholder={'Период'}
+                onChange={handlePeriodChange}
+              />
+              <CheckPicker
+                className={styles.picker}
+                data={formatData}
+                placeholder={'Фильтр'}
+              />
             </div>
             <div className={styles.topFiltersBlockContent}>
               <span>Пространство</span>
-              <SelectPicker data={spaceData} placeholder={'География'}/>
-              <CheckPicker data={regionData} placeholder={'Фильтр'}/>
+              <SelectPicker
+                data={spaceData}
+                placeholder={'География'}
+                onChange={handleRegionChenge}
+              />
+              <CheckPicker
+                data={regionData}
+                placeholder={'Фильтр'}
+              />
             </div>
           </div>
         </Panel>
