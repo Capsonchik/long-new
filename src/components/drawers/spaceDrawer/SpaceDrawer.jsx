@@ -4,10 +4,13 @@ import {CheckPicker, Drawer, Panel, SelectPicker} from "rsuite";
 import {useDispatch, useSelector} from "react-redux";
 import {selectSpaceAndTimeDrawer} from "../../../store/drawerSlice/drawer.selectors.js";
 import {DATE_TO_PICK, PERIOD, REGION, SPACE} from "../../../mocks/regionMock.js";
+import {useState} from "react";
+import {dateToPickFormatter} from "../../helpers/dateHelper.js";
 
 export const SpaceDrawer = () => {
   const dispatch = useDispatch();
   const status = useSelector(selectSpaceAndTimeDrawer);
+  const [format, setFormat] = useState([])
 
   const dateToPick = DATE_TO_PICK.map(item => ({
     label: item,
@@ -29,6 +32,20 @@ export const SpaceDrawer = () => {
     value: {id: item, name: item, slave: item},
   }))
 
+  const formatData = format.map(item => ({
+    label: item,
+    value: {id: item, name: item, slave: item},
+  }))
+
+  const handlePeriodChange = (value) => {
+    if (value === null) {
+      return periodData;
+    } else {
+      const currentFormat = dateToPickFormatter(value.name)
+      setFormat(currentFormat)
+    }
+  }
+
   return (
     <Drawer open={status} onClose={() => dispatch(setSpaceAndTimeDrawer(false))}>
       <Drawer.Body style={{display: 'flex', flexDirection: 'column', gap: '1rem'}}>
@@ -37,8 +54,9 @@ export const SpaceDrawer = () => {
           <div className={styles.topFiltersBlock}>
             <div className={styles.topFiltersBlockContent}>
               <span>Время</span>
-              <SelectPicker className={styles.picker} data={periodData} placeholder={'Период'}/>
-              <CheckPicker className={styles.picker} data={dateToPick} placeholder={'Фильтр'}/>
+              <SelectPicker className={styles.picker} data={periodData} placeholder={'Период'}
+                            onChange={handlePeriodChange}/>
+              <CheckPicker className={styles.picker} data={formatData} placeholder={'Фильтр'}/>
             </div>
             <div className={styles.topFiltersBlockContent}>
               <span>Пространство</span>
