@@ -115,7 +115,7 @@ export const SecondParamBlock = () => {
         disabled={!isFirstParamDone}
         className={styles.picker}
         data={sourceData}
-        placeholder={isFirstParamDone ? 'Сегмент' : 'Заполните первый параметр'}
+        placeholder={isFirstParamDone ? 'Источник' : 'Заполните первый параметр'}
       />
       <SelectPicker
         disabled={!isFirstParamDone}
