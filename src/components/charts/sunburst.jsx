@@ -1,30 +1,33 @@
 import ReactECharts from "echarts-for-react";
 import {useEffect, useRef, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {
-  selectBackData,
-  selectFirstCurrentValue,
-  selectGraphKey,
-  selectSunBurstData
-} from "../../store/sunBirstSlice/sunBurst.selectors.js";
+import {selectBackData, selectGraphKey, selectSunBurstData} from "../../store/sunBirstSlice/sunBurst.selectors.js";
 import {
   fetchGetBackData,
   fetchGetDefaultSunBurst,
   fetchGetNextSunBurst,
   fetchGetSunBurstBack
 } from "../../store/sunBirstSlice/sunBurst.actions.js";
-import {Button} from "rsuite";
+import {Button, Message, useToaster} from "rsuite";
 import {setFirstBackData, setFirstCurrentValue} from "../../store/sunBirstSlice/sunBurst.slice.js";
+import {fetchGetAnswers} from "../../store/firstParamsSlice/firstParam.actions.js";
+import {setQuestion1} from "../../store/firstParamsSlice/firstParam.slice.js";
 
 export const Sunburst = () => {
-  const [currentValue, setCurrentValue] = useState('')
   const sunBurstData = useSelector(selectSunBurstData);
   const key = useSelector(selectGraphKey);
   const backData = useSelector(selectBackData);
-  const value = useSelector(selectFirstCurrentValue);
   const dispatch = useDispatch();
   const [currentData, setCurrentData] = useState([])
   const chartRef = useRef(null)
+  const [placement, setPlacement] = useState('topEnd');
+  const toaster = useToaster()
+
+  const message = (
+    <Message showIcon type={'success'} closable>
+      <strong>{'Готово'}!</strong> Можно перейти к выбору второго параметра.
+    </Message>
+  );
 
   const handleBack = () => {
     if (backData === null) {
@@ -48,6 +51,12 @@ export const Sunburst = () => {
     dispatch(setFirstCurrentValue(params.data.name))
     dispatch(fetchGetNextSunBurst(params.data.name))
     dispatch(setFirstBackData(params.data.name))
+    console.log('is last:', params.data.is_last_block)
+    if (params.data.is_last_block) {
+      toaster.push(message, {placement, duration: 3000})
+      dispatch(setQuestion1(+params.data.id))
+      dispatch(fetchGetAnswers(+params.data.id))
+    }
   };
 
   const onEvents = {

@@ -1,5 +1,5 @@
 import ReactECharts from "echarts-for-react";
-import {Button} from "rsuite";
+import {Button, Message, useToaster} from "rsuite";
 import {useEffect, useRef, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {
@@ -15,6 +15,9 @@ import {
   selectSecondCurrentValue
 } from "../../store/sunBirstSlice/sunBurst.selectors.js";
 import {setNextBackData, setSecondCurrentValue} from "../../store/sunBirstSlice/sunBurst.slice.js";
+import {setIsSecondParamDone} from "../../store/secondParamSlice/secondParam.slice.js";
+import {fetchGetNextAnswers} from "../../store/secondParamSlice/secondParam.actions.js";
+import {setQuestion2} from "../../store/firstParamsSlice/firstParam.slice.js";
 
 export const SunBurstNext = () => {
   const dispatch = useDispatch();
@@ -24,8 +27,16 @@ export const SunBurstNext = () => {
   const backData = useSelector(selectNextBackData);
   const key = useSelector(selectNextSunBurstKey);
   const chartRef = useRef(null)
+  const [placement, setPlacement] = useState('topEnd');
+  const toaster = useToaster()
 
   const [currentData, setCurrentData] = useState([])
+
+  const message = (
+    <Message showIcon type={'success'} closable>
+      <strong>{'Готово'}!</strong> Перейдите к выбору графика аналитики.
+    </Message>
+  );
 
   useEffect(() => {
     setCurrentData(secondSunBurst);
@@ -47,6 +58,12 @@ export const SunBurstNext = () => {
     dispatch(setSecondCurrentValue(params.data.name))
     dispatch(setNextBackData(params.data.name))
     dispatch(fetchGetSecondSunBurst(params.data.name));
+    if (params.data.is_last_block) {
+      toaster.push(message, {placement, duration: 3000})
+      dispatch(fetchGetNextAnswers(+params.data.id))
+      dispatch(setQuestion2(+params.data.id))
+      dispatch(setIsSecondParamDone(true))
+    }
   };
 
   const onEvents = {
