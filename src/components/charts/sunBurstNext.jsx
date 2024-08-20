@@ -22,6 +22,7 @@ import {
 } from "../../store/secondParamSlice/secondParam.slice.js";
 import {fetchGetNextAnswers} from "../../store/secondParamSlice/secondParam.actions.js";
 import {setQuestion2} from "../../store/firstParamsSlice/firstParam.slice.js";
+import {setSecondQuestion} from "../../store/questionSlice/questionDesscription.slice.js";
 
 export const SunBurstNext = () => {
   const dispatch = useDispatch();
@@ -70,6 +71,7 @@ export const SunBurstNext = () => {
       dispatch(setIsSecondParamDone(true))
       dispatch(setNextParamFifthBlockScaleType(params.data.scale_type))
       dispatch(setNextParamFifthBlockParamBlockCategoryId(+params.data.id))
+      dispatch(setSecondQuestion(params.data))
     }
   };
 

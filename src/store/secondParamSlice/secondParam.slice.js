@@ -86,8 +86,10 @@ export const secondParamsSlice = createSlice({
     },
     setFormatter: (state, action) => {
       state.formatter = action.payload
+    },
+    clearGraphData: (state) => {
+      state.nextParamGraphData = null
     }
-
   },
   extraReducers: builder =>
     builder
@@ -128,6 +130,7 @@ export const {
   setNextParamFifthBlockScaleType,
   setIsSecondParamDone,
   setNextAnswerTitle,
-  setFormatter
+  setFormatter,
+  clearGraphData
 } = secondParamsSlice.actions
 export default secondParamsSlice.reducer

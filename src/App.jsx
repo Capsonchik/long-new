@@ -19,6 +19,7 @@ import {InfoDraver} from "./components/drawers/infoDrawer/InfoDraver.jsx";
 import {ExternalDrawer} from "./components/drawers/externalDrawer/externalDrawer.jsx";
 import {ReportDrawer} from "./components/drawers/reportDrawer/reportDrawer.jsx";
 import {setSwitchBtn} from "./store/mainSlice.js";
+import {clearGraphData} from "./store/secondParamSlice/secondParam.slice.js";
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -28,6 +29,7 @@ export const App = () => {
     dispatch(fetchGetFirstParams())
     dispatch(fetchGetDefaultSunBurst())
     dispatch(fetchGetNextDefaultSunBurst())
+    dispatch(clearGraphData())
   }, [dispatch]);
 
   return (

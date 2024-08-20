@@ -7,6 +7,7 @@ import corelationSlice from './corelationSlice/corelation.slice.js'
 import fTestSlice from './fTestSlice/fTest.slice.js'
 import hiSlice from './hiSlice/hi.slice.js'
 import drawerSlice from './drawerSlice/drawer.slice.js'
+import questionSlice from './questionSlice/questionDesscription.slice.js'
 
 export const store = configureStore({
   reducer: {
@@ -18,5 +19,6 @@ export const store = configureStore({
     fTest: fTestSlice,
     hi: hiSlice,
     drawers: drawerSlice,
+    questions: questionSlice,
   },
 })
