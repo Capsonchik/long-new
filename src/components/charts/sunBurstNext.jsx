@@ -15,7 +15,11 @@ import {
   selectSecondCurrentValue
 } from "../../store/sunBirstSlice/sunBurst.selectors.js";
 import {setNextBackData, setSecondCurrentValue} from "../../store/sunBirstSlice/sunBurst.slice.js";
-import {setIsSecondParamDone} from "../../store/secondParamSlice/secondParam.slice.js";
+import {
+  setIsSecondParamDone,
+  setNextParamFifthBlockParamBlockCategoryId,
+  setNextParamFifthBlockScaleType
+} from "../../store/secondParamSlice/secondParam.slice.js";
 import {fetchGetNextAnswers} from "../../store/secondParamSlice/secondParam.actions.js";
 import {setQuestion2} from "../../store/firstParamsSlice/firstParam.slice.js";
 
@@ -60,9 +64,12 @@ export const SunBurstNext = () => {
     dispatch(fetchGetSecondSunBurst(params.data.name));
     if (params.data.is_last_block) {
       toaster.push(message, {placement, duration: 3000})
+      console.log(params.data)
       dispatch(fetchGetNextAnswers(+params.data.id))
       dispatch(setQuestion2(+params.data.id))
       dispatch(setIsSecondParamDone(true))
+      dispatch(setNextParamFifthBlockScaleType(params.data.scale_type))
+      dispatch(setNextParamFifthBlockParamBlockCategoryId(+params.data.id))
     }
   };
 

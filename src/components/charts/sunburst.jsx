@@ -11,7 +11,11 @@ import {
 import {Button, Message, useToaster} from "rsuite";
 import {setFirstBackData, setFirstCurrentValue} from "../../store/sunBirstSlice/sunBurst.slice.js";
 import {fetchGetAnswers} from "../../store/firstParamsSlice/firstParam.actions.js";
-import {setQuestion1} from "../../store/firstParamsSlice/firstParam.slice.js";
+import {
+  setFifthBlockParamBlockCategoryId,
+  setFifthBlockParamScaleType,
+  setQuestion1
+} from "../../store/firstParamsSlice/firstParam.slice.js";
 
 export const Sunburst = () => {
   const sunBurstData = useSelector(selectSunBurstData);
@@ -56,6 +60,8 @@ export const Sunburst = () => {
       toaster.push(message, {placement, duration: 3000})
       dispatch(setQuestion1(+params.data.id))
       dispatch(fetchGetAnswers(+params.data.id))
+      dispatch(setFifthBlockParamScaleType(params.data.scale_type))
+      dispatch(setFifthBlockParamBlockCategoryId(+params.data.id))
     }
   };
 
