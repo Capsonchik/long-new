@@ -31,7 +31,7 @@ export const SunGraphs = () => {
           alignItems: "center"
         }}>
           <span><strong>Выбранный вопрос:</strong> {firstQuestion.name}</span>
-          <Button onClick={handleClearFirstResult}>Вернуться назад</Button>
+          <Button style={{marginTop: '1rem'}} onClick={handleClearFirstResult}>Вернуться назад</Button>
         </div>
       )}
 
@@ -44,7 +44,7 @@ export const SunGraphs = () => {
           alignItems: "center"
         }}>
           <span><strong>Выбранный вопрос:</strong> {secondQuestion.name}</span>
-          <Button onClick={handleClearSecondResult}>Вернуться назад</Button>
+          <Button style={{marginTop: '1rem'}} onClick={handleClearSecondResult}>Вернуться назад</Button>
         </div>
       )}
 
