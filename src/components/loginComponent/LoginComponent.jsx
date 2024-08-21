@@ -33,7 +33,7 @@ export const LoginComponent = () => {
         alert('Неверный логин или пароль');
         setLoader(false)
       }
-    }, 3000)
+    }, 2000)
 
   };
 
