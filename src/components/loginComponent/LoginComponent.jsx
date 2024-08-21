@@ -31,6 +31,7 @@ export const LoginComponent = () => {
         navigate('/')
       } else {
         alert('Неверный логин или пароль');
+        setLoader(false)
       }
     }, 3000)
 
