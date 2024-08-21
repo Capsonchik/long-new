@@ -11,14 +11,13 @@ import {FilterDrawer} from "./components/drawers/filterDrawer/FilterDrower.jsx";
 import {selectSwitchBtn} from "./store/mainSelectors.js";
 import {SunGraphs} from "./components/block3/graphs/SunGraphs.jsx";
 import {fetchGetDefaultSunBurst, fetchGetNextDefaultSunBurst} from "./store/sunBirstSlice/sunBurst.actions.js";
-import {Button, Panel} from "rsuite";
+import {Panel} from "rsuite";
 import {ControlPanel} from "./components/controlPanel/ControlPanel.jsx";
 import {AnaliticDrawer} from "./components/drawers/analiticDrawer/AnaliticDrawer.jsx";
 import {SpaceDrawer} from "./components/drawers/spaceDrawer/SpaceDrawer.jsx";
 import {InfoDraver} from "./components/drawers/infoDrawer/InfoDraver.jsx";
 import {ExternalDrawer} from "./components/drawers/externalDrawer/externalDrawer.jsx";
 import {ReportDrawer} from "./components/drawers/reportDrawer/reportDrawer.jsx";
-import {setSwitchBtn} from "./store/mainSlice.js";
 import {clearGraphData} from "./store/secondParamSlice/secondParam.slice.js";
 
 export const App = () => {
@@ -68,16 +67,16 @@ export const App = () => {
 
       </div>
       <ControlPanel/>
-      <div style={{width: '100%', display: 'flex', justifyContent: 'center'}}>
-        <Button
-          style={{width: 500, marginTop: '1rem'}}
-          color="orange"
-          appearance="primary"
-          onClick={() => dispatch(setSwitchBtn(!btnStatus))}
-        >
-          {!btnStatus ? 'Фильтры' : 'Круг'}
-        </Button>
-      </div>
+      {/*<div style={{width: '100%', display: 'flex', justifyContent: 'center'}}>*/}
+      {/*  <Button*/}
+      {/*    style={{width: 500, marginTop: '1rem'}}*/}
+      {/*    color="orange"*/}
+      {/*    appearance="primary"*/}
+      {/*    onClick={() => dispatch(setSwitchBtn(!btnStatus))}*/}
+      {/*  >*/}
+      {/*    {!btnStatus ? 'Фильтры' : 'Круг'}*/}
+      {/*  </Button>*/}
+      {/*</div>*/}
       <FilterDrawer/>
       <AnaliticDrawer/>
       <SpaceDrawer/>

@@ -5,12 +5,12 @@ import {
   setAnaliticDrawer,
   setExternalDrawer,
   setInfoDrawer,
-  setReportDrawer,
   setSpaceAndTimeDrawer
 } from "../../store/drawerSlice/drawer.slice.js";
 import {selectSwitchBtn} from "../../store/mainSelectors.js";
 import {selectIsSecondParamDone} from "../../store/secondParamSlice/secondParamSelectors.js";
 import {selectDataLoader} from "../../store/firstParamsSlice/firstParam.selectors.js";
+import {setSwitchBtn} from "../../store/mainSlice.js";
 
 export const ControlPanel = () => {
   const dispatch = useDispatch();
@@ -36,6 +36,7 @@ export const ControlPanel = () => {
           color="orange"
           appearance="primary"
           className={styles.btn}
+          disabled
         >
           Пространство и время
         </Button>
@@ -44,6 +45,7 @@ export const ControlPanel = () => {
           color="orange"
           appearance="primary"
           className={styles.btn}
+          disabled
         >
           Инфо поле
         </Button>
@@ -52,25 +54,26 @@ export const ControlPanel = () => {
           color="orange"
           appearance="primary"
           className={styles.btn}
+          disabled
         >
           Внешние факторы
         </Button>
-        <Button
-          onClick={() => dispatch(setReportDrawer(true))}
-          color="orange"
-          appearance="primary"
-          className={styles.btn}
-        >
-          Отображение отчета
-        </Button>
         {/*<Button*/}
-        {/*  className={styles.btn}*/}
+        {/*  onClick={() => dispatch(setReportDrawer(true))}*/}
         {/*  color="orange"*/}
         {/*  appearance="primary"*/}
-        {/*  onClick={() => dispatch(setSwitchBtn(!btnStatus))}*/}
+        {/*  className={styles.btn}*/}
         {/*>*/}
-        {/*  {btnStatus ? 'Фильтры' : 'Круг'}*/}
+        {/*  Отображение отчета*/}
         {/*</Button>*/}
+        <Button
+          className={styles.btn}
+          color="orange"
+          appearance="primary"
+          onClick={() => dispatch(setSwitchBtn(!btnStatus))}
+        >
+          {btnStatus ? 'Фильтры' : 'Круг'}
+        </Button>
       </div>
 
     </Panel>
