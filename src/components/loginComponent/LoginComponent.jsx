@@ -1,11 +1,19 @@
 import styles from './styles.module.scss';
-import {Button, Form} from "rsuite";
+import {Button, Form, Message, useToaster} from "rsuite";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 
 export const LoginComponent = () => {
   const [loader, setLoader] = useState(false);
+  const [placement, setPlacement] = useState('topEnd')
+  const toaster = useToaster()
   const navigate = useNavigate();
+
+  const message = (
+    <Message showIcon type={'error'} closable>
+      <strong>Неверный логин или пароль</strong>
+    </Message>
+  );
 
   const [formData, setFormData] = useState({
     name: '',
@@ -30,7 +38,7 @@ export const LoginComponent = () => {
         setLoader(false)
         navigate('/')
       } else {
-        alert('Неверный логин или пароль');
+        toaster.push(message, {placement, duration: 3000})
         setLoader(false)
       }
     }, 2000)
