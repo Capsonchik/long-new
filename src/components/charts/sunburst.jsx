@@ -16,6 +16,7 @@ import {
   setFifthBlockParamScaleType,
   setQuestion1
 } from "../../store/firstParamsSlice/firstParam.slice.js";
+import {setFirstQuestion} from "../../store/questionSlice/questionDesscription.slice.js";
 
 export const Sunburst = () => {
   const sunBurstData = useSelector(selectSunBurstData);
@@ -62,6 +63,7 @@ export const Sunburst = () => {
       dispatch(fetchGetAnswers(+params.data.id))
       dispatch(setFifthBlockParamScaleType(params.data.scale_type))
       dispatch(setFifthBlockParamBlockCategoryId(+params.data.id))
+      dispatch(setFirstQuestion(params.data))
     }
   };
 
