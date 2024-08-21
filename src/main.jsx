@@ -12,7 +12,6 @@ import {LoginPage} from "./pages/loginPage/LoginPage.jsx";
 
 const ProtectedRoute = ({children}) => {
   const token = localStorage.getItem('longAuthToken');
-
   if (!token) {
     return <Navigate to="/login"/>;
   }
