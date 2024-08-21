@@ -36,12 +36,12 @@ export const App = () => {
     <div className={styles.container}>
       <Header/>
       {/*<ExternalFactors/>*/}
-      <ControlPanel/>
+
 
       <div className={styles.topBlocks}>
         <Panel bordered className={styles.concatBlocks}>
           {/*<div className={styles.concatBlocks}>*/}
-          {btnStatus ? <SunGraphs/> : (
+          {!btnStatus ? <SunGraphs/> : (
             <div className={styles.concatTop}>
               <div className={styles.block1}>
                 <FirstParamBlock/>
@@ -67,6 +67,7 @@ export const App = () => {
         </Panel>
 
       </div>
+      <ControlPanel/>
       <div style={{width: '100%', display: 'flex', justifyContent: 'center'}}>
         <Button
           style={{width: 500, marginTop: '1rem'}}
@@ -74,7 +75,7 @@ export const App = () => {
           appearance="primary"
           onClick={() => dispatch(setSwitchBtn(!btnStatus))}
         >
-          {btnStatus ? 'Фильтры' : 'Круг'}
+          {!btnStatus ? 'Фильтры' : 'Круг'}
         </Button>
       </div>
       <FilterDrawer/>
