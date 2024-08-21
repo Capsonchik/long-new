@@ -1,7 +1,10 @@
+import styles from './styles.module.scss';
+import {LoginComponent} from "../../components/loginComponent/LoginComponent.jsx";
+
 export const LoginPage = () => {
   return (
-    <div>
-      Login Page
+    <div className={styles.mainContainer}>
+      <LoginComponent/>
     </div>
   );
 };
