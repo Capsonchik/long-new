@@ -100,7 +100,7 @@ export const SunBurstNext = () => {
       data: currentData,
       radius: [0, '90%'],
       label: {
-        rotate: 'radial',
+        rotate: 'horizontal',
         overflow: 'truncate',
         ellipsis: '...',
         formatter: function (params) {
