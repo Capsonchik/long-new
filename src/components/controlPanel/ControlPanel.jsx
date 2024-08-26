@@ -72,7 +72,7 @@ export const ControlPanel = () => {
           appearance="primary"
           onClick={() => dispatch(setSwitchBtn(!btnStatus))}
         >
-          {btnStatus ? 'Фильтры' : 'Круг'}
+          {!btnStatus ? 'Фильтры' : 'Круг'}
         </Button>
       </div>
 
