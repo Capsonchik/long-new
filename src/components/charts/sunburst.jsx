@@ -1,7 +1,12 @@
 import ReactECharts from "echarts-for-react";
 import {useEffect, useRef, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {selectBackData, selectGraphKey, selectSunBurstData} from "../../store/sunBirstSlice/sunBurst.selectors.js";
+import {
+  selectBackData,
+  selectGraphKey,
+  selectSunBurstData,
+  selectSunError
+} from "../../store/sunBirstSlice/sunBurst.selectors.js";
 import {
   fetchGetBackData,
   fetchGetDefaultSunBurst,
@@ -17,6 +22,7 @@ import {
   setQuestion1
 } from "../../store/firstParamsSlice/firstParam.slice.js";
 import {setFirstQuestion} from "../../store/questionSlice/questionDesscription.slice.js";
+import {ErrorWarning} from "../../errorComponents/ErrorWarning.jsx";
 
 export const Sunburst = () => {
   const sunBurstData = useSelector(selectSunBurstData);
@@ -26,6 +32,7 @@ export const Sunburst = () => {
   const [currentData, setCurrentData] = useState([])
   const chartRef = useRef(null)
   const [placement, setPlacement] = useState('topEnd');
+  const error = useSelector(selectSunError);
   const toaster = useToaster()
 
   const message = (
@@ -105,20 +112,29 @@ export const Sunburst = () => {
 
   return (
     <div style={{position: 'relative'}}>
-      <Button
-        style={{position: 'absolute', zIndex: 999}}
-        onClick={handleBack}
-        disabled={backData === '' || backData === null}
-      >
-        Назад
-      </Button>
-      <ReactECharts
-        ref={chartRef}
-        key={key}
-        style={{height: 400, width: 400}}
-        option={option}
-        onEvents={onEvents}
-      />
+      {
+        error
+          ? <ErrorWarning/>
+          : (
+            <>
+              <Button
+                style={{position: 'absolute', zIndex: 999}}
+                onClick={handleBack}
+                disabled={backData === '' || backData === null}
+              >
+                Назад
+              </Button>
+              <ReactECharts
+                ref={chartRef}
+                key={key}
+                style={{height: 400, width: 400}}
+                option={option}
+                onEvents={onEvents}
+              />
+            </>
+          )
+      }
+
     </div>
   );
 };

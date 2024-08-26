@@ -12,7 +12,8 @@ import {
   selectNextBackData,
   selectNextSunBurstData,
   selectNextSunBurstKey,
-  selectSecondCurrentValue
+  selectSecondCurrentValue,
+  selectSunError
 } from "../../store/sunBirstSlice/sunBurst.selectors.js";
 import {setNextBackData, setSecondCurrentValue} from "../../store/sunBirstSlice/sunBurst.slice.js";
 import {
@@ -23,6 +24,7 @@ import {
 import {fetchGetNextAnswers} from "../../store/secondParamSlice/secondParam.actions.js";
 import {setQuestion2} from "../../store/firstParamsSlice/firstParam.slice.js";
 import {setSecondQuestion} from "../../store/questionSlice/questionDesscription.slice.js";
+import {ErrorWarning} from "../../errorComponents/ErrorWarning.jsx";
 
 export const SunBurstNext = () => {
   const dispatch = useDispatch();
@@ -31,9 +33,10 @@ export const SunBurstNext = () => {
   const secondSunBurst = useSelector(selectNextSunBurstData);
   const backData = useSelector(selectNextBackData);
   const key = useSelector(selectNextSunBurstKey);
-  const chartRef = useRef(null)
+  const chartRef = useRef(null);
   const [placement, setPlacement] = useState('topEnd');
-  const toaster = useToaster()
+  const toaster = useToaster();
+  const error = useSelector(selectSunError);
 
   const [currentData, setCurrentData] = useState([])
 
@@ -123,19 +126,28 @@ export const SunBurstNext = () => {
 
   return (
     <div style={{position: 'relative'}}>
-      <Button
-        onClick={handleBack}
-        style={{position: 'absolute', zIndex: 999}}
-      >
-        Назад
-      </Button>
-      <ReactECharts
-        ref={chartRef}
-        key={key}
-        style={{height: 400, width: 400}}
-        option={option}
-        onEvents={onEvents}
-      />
+      {
+        error
+          ? <ErrorWarning/>
+          : (
+            <>
+              <Button
+                onClick={handleBack}
+                style={{position: 'absolute', zIndex: 999}}
+              >
+                Назад
+              </Button>
+              <ReactECharts
+                ref={chartRef}
+                key={key}
+                style={{height: 400, width: 400}}
+                option={option}
+                onEvents={onEvents}
+              />
+            </>
+          )
+      }
+
     </div>
   );
 };

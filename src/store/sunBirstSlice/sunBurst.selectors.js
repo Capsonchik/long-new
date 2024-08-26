@@ -6,3 +6,4 @@ export const selectNextSunBurstKey = (state) => state.sunBurst.nextKey;
 export const selectFirstCurrentValue = (state) => state.sunBurst.firstCurrentValue;
 export const selectSecondCurrentValue = (state) => state.sunBurst.secondCurrentValue;
 export const selectNextBackData = (state) => state.sunBurst.nextBackData;
+export const selectSunError = (state) => state.sunBurst.error;

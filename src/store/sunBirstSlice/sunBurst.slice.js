@@ -18,7 +18,8 @@ const initialState = {
   nextSunBurstData: [],
   nextKey: 0,
   secondCurrentValue: '',
-  nextBackData: ''
+  nextBackData: '',
+  error: false
 }
 
 export const sunBurstSlice = createSlice({
@@ -46,9 +47,13 @@ export const sunBurstSlice = createSlice({
       .addCase(fetchGetDefaultSunBurst.fulfilled, (state, action) => {
         state.sunBurstData = action.payload;
         state.key = state.key + 1;
+        state.error = false
       })
       .addCase(fetchGetDefaultSunBurst.pending, (state) => {
         state.sunBurstData = [];
+      })
+      .addCase(fetchGetDefaultSunBurst.rejected, (state) => {
+        state.error = true;
       })
       .addCase(fetchGetNextSunBurst.fulfilled, (state, action) => {
         state.sunBurstData = action.payload;
