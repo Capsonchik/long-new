@@ -34,7 +34,8 @@ export const counterSlice = createSlice({
 export const {
   setLong,
   setFilterDrawerStatus,
-  setSwitchBtn
+  setSwitchBtn,
+  setCurrentGraph
 } = counterSlice.actions
 
 export default counterSlice.reducer
