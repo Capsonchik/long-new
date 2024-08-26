@@ -9,9 +9,11 @@ import {HiPage} from "./pages/hiPage/HiPage.jsx";
 import {CorelationPage} from "./pages/corelationPage/CorelationPage.jsx";
 import {FtestPage} from "./pages/fTestPage/FtestPage.jsx";
 import {LoginPage} from "./pages/loginPage/LoginPage.jsx";
+import Cookies from "js-cookie";
 
 const ProtectedRoute = ({children}) => {
-  const token = localStorage.getItem('longAuthToken');
+  const token = Cookies.get('longAuthToken');
+
   if (!token) {
     return <Navigate to="/login"/>;
   }

@@ -2,10 +2,12 @@ import styles from './styles.module.scss';
 import {Button, Form, Message, useToaster} from "rsuite";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
+import Cookies from 'js-cookie';
 
 export const LoginComponent = () => {
   const [loader, setLoader] = useState(false);
-  const [placement, setPlacement] = useState('topEnd')
+  // const [placement, setPlacement] = useState('topEnd')
+  const placement = 'topEnd';
   const toaster = useToaster()
   const navigate = useNavigate();
 
@@ -31,18 +33,17 @@ export const LoginComponent = () => {
 
   const handleLogIn = () => {
     setLoader(true);
-
     setTimeout(() => {
       if (formData.name === 'user' && formData.password === 'user') {
-        localStorage.setItem('longAuthToken', formData.name);
-        setLoader(false)
-        navigate('/')
+        // Устанавливаем cookie с именем пользователя и временем жизни 3 дня
+        Cookies.set('longAuthToken', formData.name, {expires: 3});
+        setLoader(false);
+        navigate('/');
       } else {
-        toaster.push(message, {placement, duration: 3000})
-        setLoader(false)
+        toaster.push(message, {placement, duration: 3000});
+        setLoader(false);
       }
-    }, 2000)
-
+    }, 2000);
   };
 
   return (
