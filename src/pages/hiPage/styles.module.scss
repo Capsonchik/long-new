@@ -1,0 +1,32 @@
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.data {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.square {
+  position: relative;
+  display: inline-block;
+
+}
+
+.square::before {
+  content: "\25A0"; /* Знак квадрата */
+  position: absolute;
+  top: -10px; /* Настройте по вашему усмотрению */
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px; /* Настройте размер квадрата */
+}

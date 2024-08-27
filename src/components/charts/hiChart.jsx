@@ -41,7 +41,8 @@ export const HiChart = () => {
       containLabel: true
     },
     xAxis: {
-      type: 'value'
+      type: 'value',
+      max: 100
     },
     yAxis: {
       type: 'category',
