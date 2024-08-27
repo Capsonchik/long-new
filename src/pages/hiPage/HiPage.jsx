@@ -10,8 +10,6 @@ export const HiPage = () => {
   const navigate = useNavigate();
   const hiData = useSelector(selectHiData);
 
-  console.log(hiData)
-
   return (
     <div className={styles.container}>
       <div className={styles.content}>
