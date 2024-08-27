@@ -8,21 +8,21 @@ export const FTestChart = () => {
   const option = {
     title: [
       {
-        text: 'Michelson-Morley Experiment',
+        text: 'Ф-тест Фишера',
         left: 'center'
       },
-      {
-        text: 'upper: Q3 + 1.5 * IQR \nlower: Q1 - 1.5 * IQR',
-        borderColor: '#999',
-        borderWidth: 1,
-        textStyle: {
-          fontWeight: 'normal',
-          fontSize: 14,
-          lineHeight: 20
-        },
-        left: '10%',
-        top: '90%'
-      }
+      // {
+      //   text: 'upper: Q3 + 1.5 * IQR \nlower: Q1 - 1.5 * IQR',
+      //   borderColor: '#999',
+      //   borderWidth: 1,
+      //   textStyle: {
+      //     fontWeight: 'normal',
+      //     fontSize: 14,
+      //     lineHeight: 20
+      //   },
+      //   left: '10%',
+      //   top: '90%'
+      // }
     ],
     dataset: [
       {
@@ -68,7 +68,7 @@ export const FTestChart = () => {
     },
     yAxis: {
       type: 'value',
-      name: 'km/s minus 299,000',
+      name: '',
       splitArea: {
         show: true
       }
