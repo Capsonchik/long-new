@@ -3,12 +3,14 @@ import {Header} from "../../components/header/Header.jsx";
 import {Button, Table} from "rsuite";
 import {useNavigate} from "react-router-dom";
 import {FTestChart} from "../../components/charts/fTestChart.jsx";
-import {TABLE_DATA} from "../../mocks/backData.js";
+import {useSelector} from "react-redux";
+import {selectFtestData} from "../../store/fTestSlice/fTest.selectors.js";
 
 const {Column, HeaderCell, Cell} = Table;
 
 export const FtestPage = () => {
   const navigate = useNavigate();
+  const fTestData = useSelector(selectFtestData);
 
   return (
     <div className={styles.container}>
@@ -19,7 +21,7 @@ export const FtestPage = () => {
       <FTestChart/>
       <Table
         height={400}
-        data={TABLE_DATA}
+        data={fTestData && fTestData.anova_model_summary}
         onRowClick={rowData => {
           console.log(rowData);
         }}
