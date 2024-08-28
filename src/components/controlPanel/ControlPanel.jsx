@@ -36,7 +36,7 @@ export const ControlPanel = () => {
           color="orange"
           appearance="primary"
           className={styles.btn}
-          disabled
+
         >
           Пространство и время
         </Button>
@@ -45,7 +45,7 @@ export const ControlPanel = () => {
           color="orange"
           appearance="primary"
           className={styles.btn}
-          disabled
+
         >
           Инфо поле
         </Button>
@@ -54,7 +54,7 @@ export const ControlPanel = () => {
           color="orange"
           appearance="primary"
           className={styles.btn}
-          disabled
+     
         >
           Внешние факторы
         </Button>
