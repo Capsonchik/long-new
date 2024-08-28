@@ -55,8 +55,8 @@ export const ExternalFactors = () => {
     }
 
     if (
-      (firstScaleType === 'метрическая' || firstScaleType === 'иерархическая') &&
-      (secondScaleType === 'категориальная' || secondScaleType === 'номинальная')
+      (firstScaleType === 'метрическая') &&
+      (secondScaleType === 'категориальная' || secondScaleType === 'иерархическая')
     ) {
       dispatch(fetchGetFtestData({parameter1: firstParam, parameter2: secondParam}));
     }
