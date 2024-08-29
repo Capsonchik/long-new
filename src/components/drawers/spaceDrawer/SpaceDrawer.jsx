@@ -36,7 +36,7 @@ export const SpaceDrawer = () => {
 
   const formatData = format.map(item => ({
     label: item,
-    value: {id: item, name: item, slave: item},
+    value: item,
   }))
 
   const handlePeriodChange = (value) => {
@@ -57,6 +57,10 @@ export const SpaceDrawer = () => {
     }
   }
 
+  const handlePeriodChanged = (value) => {
+    console.log(value)
+  }
+
   return (
     <Drawer open={status} onClose={() => dispatch(setSpaceAndTimeDrawer(false))}>
       <Drawer.Body style={{display: 'flex', flexDirection: 'column', gap: '1rem'}}>
@@ -74,6 +78,7 @@ export const SpaceDrawer = () => {
               <CheckPicker
                 className={styles.picker}
                 data={formatData}
+                onChange={handlePeriodChanged}
                 placeholder={'Фильтр'}
               />
             </div>

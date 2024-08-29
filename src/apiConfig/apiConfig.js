@@ -20,3 +20,21 @@ const createAxiosMainRequest = () => {
 };
 
 export const axiosMainRequest = createAxiosMainRequest();
+
+
+const createAxiosNewsRequest = () => {
+  const instance = axios.create({
+    baseURL: 'https://newsdata.io/api/1/',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      'Accept-Language': 'ru',
+      "ngrok-skip-browser-warning": 'true',
+    },
+    withCredentials: true
+  });
+
+  return instance;
+};
+
+export const axiosNewsRequest = createAxiosNewsRequest();

@@ -8,6 +8,7 @@ import fTestSlice from './fTestSlice/fTest.slice.js'
 import hiSlice from './hiSlice/hi.slice.js'
 import drawerSlice from './drawerSlice/drawer.slice.js'
 import questionSlice from './questionSlice/questionDesscription.slice.js'
+import newsSlice from './newsSlice/news.slice.js'
 
 export const store = configureStore({
   reducer: {
@@ -20,5 +21,6 @@ export const store = configureStore({
     hi: hiSlice,
     drawers: drawerSlice,
     questions: questionSlice,
+    news: newsSlice
   },
 })
