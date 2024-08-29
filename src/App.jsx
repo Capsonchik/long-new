@@ -19,6 +19,7 @@ import {InfoDraver} from "./components/drawers/infoDrawer/InfoDraver.jsx";
 import {ExternalDrawer} from "./components/drawers/externalDrawer/externalDrawer.jsx";
 import {ReportDrawer} from "./components/drawers/reportDrawer/reportDrawer.jsx";
 import {clearGraphData} from "./store/secondParamSlice/secondParam.slice.js";
+import {fetchGetNews} from "./store/newsSlice/news.actions.js";
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ export const App = () => {
     dispatch(fetchGetDefaultSunBurst())
     dispatch(fetchGetNextDefaultSunBurst())
     dispatch(clearGraphData())
+    dispatch(fetchGetNews())
   }, [dispatch]);
 
   return (

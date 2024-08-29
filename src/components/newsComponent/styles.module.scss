@@ -1,0 +1,25 @@
+.newsContainer {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.newsContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  margin-bottom: 1rem;
+}
+
+.img {
+  width: 150px;
+  height: 100px;
+  margin-right: 1rem;
+  object-fit: cover;
+}
+
+.description {
+
+}

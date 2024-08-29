@@ -31,7 +31,7 @@ const createAxiosNewsRequest = () => {
       'Accept-Language': 'ru',
       "ngrok-skip-browser-warning": 'true',
     },
-    withCredentials: true
+    // withCredentials: true
   });
 
   return instance;
